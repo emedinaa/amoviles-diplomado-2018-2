@@ -241,6 +241,7 @@ ext {
 }
 ```
 
+
 Build.gradle de la App
 
 ```
@@ -294,11 +295,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
-```Gradle version : 4.1
+```
+
+Gradle version : 4.1
 
 Android Plugin Version : 3.0.1
 
 Build.gradle del proyecto
+
 ```
   // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -341,6 +345,7 @@ ext {
     junitVersion = '4.12'
 }
 ```
+
 
 Build.gradle de la App
 
@@ -451,6 +456,7 @@ System.out.println( first_name + " " + family_name );
 ```
 
 Operadores
+
 ```
 + (the plus sign)
 - (the minus sign)
