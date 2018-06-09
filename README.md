@@ -56,6 +56,12 @@ Tamaños
 
 Android dashboard [https://developer.android.com/about/dashboards/](https://developer.android.com/about/dashboards/)
 
+### 2/3. Android Studio
+
+<img src="https://developer.android.com/studio/images/studio-homepage-hero_2x.jpg" height="360"/>
+
+Android Studio [https://developer.android.com/studio/](https://developer.android.com/studio/?hl=es-419)
+
 ### 4. App Components
 
 App Components
