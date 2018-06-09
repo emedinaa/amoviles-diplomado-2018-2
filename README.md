@@ -181,6 +181,21 @@ To see all tasks and more detail, run gradlew tasks --all
 To see more detail about a task, run gradlew help --task <task>
 ```
 
+### 7. Crea tu primera aplicación
+
+Build your first App [https://developer.android.com/training/basics/firstapp/](https://developer.android.com/training/basics/firstapp/)
+
+<img src="https://developer.android.com/training/basics/firstapp/images/studio-welcome_2x.png" height="240"/>
+
+<img src="https://developer.android.com/training/basics/firstapp/images/studio-editor_2x.png" height="240"/>
+
+<img src="https://developer.android.com/training/basics/firstapp/images/run-avd_2x.png" height="240"/>
+
+<img src="https://developer.android.com/training/basics/firstapp/images/screenshot-activity2.png" height="240"/>
+
+### 8. Java for Android Developers
+
+
 ## Homework
 
   ### Gradle
