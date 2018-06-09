@@ -633,6 +633,8 @@ Build your first app  [https://developer.android.com/training/basics/firstapp/](
 
 - Resources to learn Git https://try.github.io/
 
+- Github Desktop https://desktop.github.com/
+
 ### Java
 
 - Online Java IDE https://www.compilejava.net/
