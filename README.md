@@ -78,6 +78,13 @@ App Components
 
 - Content providers
 
+
+### 5. Android Emulator
+
+<img src="https://www.genymotion.com/wp-content/uploads/2016/02/features-genymotion-imac.jpg" height="360"/>
+
+Genymotion [https://www.genymotion.com/desktop/](https://www.genymotion.com/desktop/)
+
 ### 6. Gradle
 
 Android Plugin for Gradle Release Notes  [https://developer.android.com/studio/releases/gradle-plugin](https://developer.android.com/studio/releases/gradle-plugin)
