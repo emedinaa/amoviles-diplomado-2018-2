@@ -195,7 +195,20 @@ Build your first App [https://developer.android.com/training/basics/firstapp/](h
 
 ### 8. Java for Android Developers
 
+## Samples
 
+- MyFirstApp
+
+ <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson1/images/my-first-app.png" height="480">
+
+- JavaForAndroid
+
+ <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson1/images/java-for-android.png" height="480">
+
+- GallerySample
+
+ <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson1/images/gallery-sample.png" height="480">
+ 
 ## Homework
 
   ### Gradle
