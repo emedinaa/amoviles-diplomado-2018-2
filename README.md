@@ -13,7 +13,7 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ## Lesson
 
-1. ¿Qué es android? (versiones, história)
+1. ¿Qué es android? (versiones, historia)
 
 2. Entorno de desarrollo Android (Android Studio)
 
@@ -36,7 +36,25 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ### Android
 
+Android architecture https://developer.android.com/guide/platform/?hl=es-419
+
+<img src="https://developer.android.com/guide/platform/images/android-stack_2x.png?hl=es-419" height="480"/>
+
+Android versions 
+
 <img src="https://raw.githubusercontent.com/learning-android-pe/training-resources/master/android-versions.jpg" height="240"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson1/images/android-versions.png" height="240"/>
+
+![versions](https://chart.googleapis.com/chart?chs=500x250&cht=p&chco=c4df9b%2C6fad0c&chf=bg%2Cs%2C00000000&chd=t%3A0.3%2C0.4%2C4.3%2C10.3%2C22.4%2C25.6%2C31.1%2C5.7&chl=Gingerbread%7CIce%20Cream%20Sandwich%7CJelly%20Bean%7CKitKat%7CLollipop%7CMarshmallow%7CNougat%7COreo)
+
+Tamaños
+
+<img src="https://chart.googleapis.com/chart?chs=400x250&cht=p&chco=c4df9b%2C6fad0c&chf=bg%2Cs%2C00000000&chd=t%3A2.9%2C5.5%2C91.1%2C0.5&chl=Xlarge%7CLarge%7CNormal%7CSmall" height="240"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson1/images/android-screens.png" height="240"/>
+
+Android dashboard [https://developer.android.com/about/dashboards/](https://developer.android.com/about/dashboards/)
 
 ### 4. App Components
 
