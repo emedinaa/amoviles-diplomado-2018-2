@@ -694,5 +694,7 @@ Build your first app  [https://developer.android.com/training/basics/firstapp/](
 
 - Android Performance Tips https://developer.android.com/training/articles/perf-tips
 
+- Interactions Patterns https://unitid.nl/androidpatterns/
+
 
 
