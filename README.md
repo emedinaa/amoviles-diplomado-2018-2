@@ -1,6 +1,10 @@
 # amoviles-diplomado-2018-2
 Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles 
 
+### Android
+
+<img src="https://raw.githubusercontent.com/learning-android-pe/training-resources/master/android-versions.jpg" height="300"/>
+
 ### 4. App Components
 
 App Components
