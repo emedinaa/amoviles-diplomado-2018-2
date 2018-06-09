@@ -179,6 +179,11 @@ To see all tasks and more detail, run gradlew tasks --all
 
 To see more detail about a task, run gradlew help --task <task>
 ```
+Android Plugin for Android
+
+https://developer.android.com/studio/releases/gradle-plugin
+
+<img src="https://github.com/emedinaa/amoviles-diplomado-2018-2/blob/Lesson1-Fundamentals/files/gradle-compatibilidad.png" height="360"/>
 
 ### 7. Crea tu primera aplicación
 
