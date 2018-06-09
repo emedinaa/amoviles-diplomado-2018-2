@@ -692,5 +692,7 @@ Build your first app  [https://developer.android.com/training/basics/firstapp/](
 
 - Gradle https://gradle.org/
 
+- Android Performance Tips https://developer.android.com/training/articles/perf-tips
+
 
 
