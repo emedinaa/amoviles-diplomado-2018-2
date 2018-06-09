@@ -1,6 +1,18 @@
 # amoviles-diplomado-2018-2
 Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles 
 
+## Homework
+
+  ### Gradle
+  
+  Buscar una librería compatible con Android y agregar la dependencia a un proyecto . Ejemplo , picasso o retrofit.
+  
+  Escoger un task del plugin de Gradle y ejecutarla desde terminal o desde Android Studio
+  
+  ### Android Studio
+  
+  Crear un proyecto en Android Studio , luego realizar los cambios acorde al template entregado en clase (gradle).
+  
 ## Resources
 
 - Github https://guides.github.com/activities/hello-world/
