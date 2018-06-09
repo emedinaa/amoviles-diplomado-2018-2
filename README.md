@@ -1,9 +1,42 @@
 # amoviles-diplomado-2018-2
 Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles 
 
+## Lesson 1 - Saturday, 9th June, 2018
+
+- Lesson
+
+- Samples
+
+- Homework
+
+- Resources
+
+## Lesson
+
+1. ¿Qué es android? (versiones, história)
+
+2. Entorno de desarrollo Android (Android Studio)
+
+3. Estructura de un proyecto Android (Android Studio)
+
+4. Componentes de una aplicación Android (Android Studio)
+
+5. Simuladores de android
+
+6. Conociendo Gradle
+
+7. Uso de mockups
+
+8. Desarrollando mi primera aplicación Android
+
+9. Explicación de Métodos, Objetos y Clases
+
+10. Características del diseño en Android
+
+
 ### Android
 
-<img src="https://raw.githubusercontent.com/learning-android-pe/training-resources/master/android-versions.jpg" height="300"/>
+<img src="https://raw.githubusercontent.com/learning-android-pe/training-resources/master/android-versions.jpg" height="240"/>
 
 ### 4. App Components
 
