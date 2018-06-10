@@ -696,5 +696,7 @@ Build your first app  [https://developer.android.com/training/basics/firstapp/](
 
 - Interactions Patterns https://unitid.nl/androidpatterns/
 
+- Comunidades https://www.meetup.com/es-ES/Android-Dev-Peru/
+
 
 
