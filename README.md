@@ -346,6 +346,7 @@ y la carpeta "exercises" , donde encontrarán ejercicios que pueden realizar rel
 ## Homework
 
 - Realizar los ejercicios 6, 7, 9. * Utilizar recursos de diseño similares.
+- Realizar los ejercicios 2,3,4  utilizando solo ConstraintLayout.
 
 ## Resources
 
