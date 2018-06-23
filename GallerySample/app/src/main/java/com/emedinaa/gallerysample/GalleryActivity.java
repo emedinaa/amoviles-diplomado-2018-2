@@ -42,15 +42,15 @@ public class GalleryActivity extends AppCompatActivity {
         txtImg.setText("Imagen " + count);//set get
 
         //Events
-        img.setOnClickListener(new View.OnClickListener() {
+        /*img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
-        });
+        });*/
 
 
-        /*img.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -64,7 +64,7 @@ public class GalleryActivity extends AppCompatActivity {
 
                 //count--;
             }
-        });*/
+        });
     }
 
     /**
