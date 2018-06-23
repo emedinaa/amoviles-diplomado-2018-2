@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 showMessage(USER_MESSAGE);
             }
         });
+        //Button btn;
+        //btn.setBackgroundColor(R.color.black);
     }
 
     private void showMessage(String message){
