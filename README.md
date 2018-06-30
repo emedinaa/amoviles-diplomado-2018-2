@@ -369,3 +369,8 @@ Creating List and Cards https://developer.android.com/training/material/lists-ca
 RecyclerView https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
 
 Android Developers Fundamentals Course - Create a RecyclerView https://google-developer-training.gitbooks.io/android-developer-fundamentals-course-practicals/content/en/Unit%202/44_p_create_a_recycler_view.html
+
+Java Collections https://docs.oracle.com/javase/tutorial/collections/index.html
+
+Java ArrayList https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html
+
