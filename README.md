@@ -31,19 +31,20 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ## Lesson
 
-• Interfaz de usuario en Android: Layouts 
+• Conocer el uso de RecyclerView y Adapter
 
-• Controles UI básicos
+• Implementar listas personalizadas
 
-• Controles de selección
+• Mejorando el aspecto de los amplicativos usando
+CardView
 
-• Creación de menús y submenús básicos 
+• Material Design II
 
-• Ciclo de vida de las actividades
+• Uso de control de versiones (Git)
 
-• Comunicación entre actividades 
+• Conocer el uso de Fragment
 
-• Introducción a Material Design
+• Implementar Frament dinámicos o estáticos
 
 ## RecyclerView & Adapters
 
@@ -368,3 +369,8 @@ Creating List and Cards https://developer.android.com/training/material/lists-ca
 RecyclerView https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
 
 Android Developers Fundamentals Course - Create a RecyclerView https://google-developer-training.gitbooks.io/android-developer-fundamentals-course-practicals/content/en/Unit%202/44_p_create_a_recycler_view.html
+
+Java Collections https://docs.oracle.com/javase/tutorial/collections/index.html
+
+Java ArrayList https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html
+
