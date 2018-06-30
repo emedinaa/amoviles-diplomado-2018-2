@@ -31,19 +31,20 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ## Lesson
 
-• Interfaz de usuario en Android: Layouts 
+• Conocer el uso de RecyclerView y Adapter
 
-• Controles UI básicos
+• Implementar listas personalizadas
 
-• Controles de selección
+• Mejorando el aspecto de los amplicativos usando
+CardView
 
-• Creación de menús y submenús básicos 
+• Material Design II
 
-• Ciclo de vida de las actividades
+• Uso de control de versiones (Git)
 
-• Comunicación entre actividades 
+• Conocer el uso de Fragment
 
-• Introducción a Material Design
+• Implementar Frament dinámicos o estáticos
 
 ## RecyclerView & Adapters
 
