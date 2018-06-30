@@ -1,7 +1,7 @@
 # amoviles-diplomado-2018-2
 Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles 
 
-## Lesson 2 - Saturday, 23th June, 2018
+## Lesson 3 - Saturday, 30th June, 2018
 
 - Review
 
@@ -17,15 +17,17 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ### ¿Qué temas vimos en la clase pasada ?
 
-- Fundamentos de Java
+- Layouts : LinearLayout , RelativeLayout
 
-- Android Studio
+- Android Resources
 
-- Ejemplos : GallerySample, JavaForAndroid, JavaSamples
+- Android Manifest
+
+- POO Java
 
 ### Activities
 
-- Completemos los ejemplos de la clase anterior , JavaSamples https://github.com/emedinaa/amoviles-diplomado-2018-2/tree/Lesson1-Fundamentals
+- Completemos los ejemplos de la clase anterior , UISamples, UIEvents https://github.com/emedinaa/amoviles-diplomado-2018-2/tree/Lesson2-ui
 
 ## Lesson
 
@@ -43,411 +45,326 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 • Introducción a Material Design
 
-### Interfaz de usuario en Android
+## RecyclerView & Adapters
 
- - Estructura de un elemento XML :
-  
-```
-    <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
-    
-        <TextView android:text="Hello World!" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-```
+  - Adapters
+  - Custom Adapters
+  - RecyclerView
+  - Events
+  - Exercises
 
-  - ID :
-  
-```
-      android:id="@+id/img"
-```
+## Adapters
+<img src="https://camo.githubusercontent.com/fc6df9d5fd6d78e48d6802c77ad7264a6a787672/68747470733a2f2f692e696d6775722e636f6d2f6d6b38324a64322e6a7067" />
 
-```
-      <TextView
-            android:id="@+id/txtImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-```
-    
-  - Atributos :
-    
-```
-        android:layout_width="300dp"
-```
-    
-  - En el código podemos invocar a los elementos XML de la siguiente manera :
-  
-```
-      @Override
-      protected void onCreate(Bundle savedInstanceState) {
-          super.onCreate(savedInstanceState);
-          setContentView(R.layout.activity_main);
-      }
-```
-    
-```
-     private ImageView img;
-     private Button btnImg;
-     private TextView txtImg;
+Los Adapters son los intermediarios entre el origen de datos y el componente visual.
+Respecto al origen de datos , contamos con los siguiente componentes :
+- List
+- ArrayList
+- Array
 
-     img= (ImageView)findViewById(R.id.img);
-     btnImg= (Button)findViewById(R.id.butImg);
-     txtImg = (TextView)findViewById(R.id.txtImg);
-```
+y a los componentes visuales, tenemos :
 
-### Layouts
+- ListView
+- GridView
+- RecyclerView
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/layoutparams.png?raw=true" height="320" />
+Los Adapters son los que asocian la colección de datos con las  celdas de nuestras vistas , tambien te permiten realizar cambios sobre ellas. Es decir, agregar, modificar o eliminar un elemento de nuestra lista .
 
-- LinearLayout
+ListView & GridView
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/linearlayout.png?raw=true" height="300"/>
+<img src="https://developer.android.com/images/ui/listview.png" /> <img src="https://developer.android.com/images/ui/gridview.png" />
 
-Horizontal / Vertical
+Tipos :
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/samples/ui/layout-linear-horizontal.png?raw=true" height="360"/>  <img src="https://github.com/learning-android-pe/training-resources/blob/master/samples/ui/layout-linear-vertical.png?raw=true" height="360"/>
+Se dispone de los siguientes tipos de adapters
+- BaseAdapter , cuando necesitemos manejar alguna lista desde cero , recomiendo utilizarlo . Usualmente solicita implementar varios métodos.
 
-Pesos
+- ArrayAdapter , este es un adapter que nos puede servir de base y solo requiere implementar un método.
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/samples/ui/layout-linear-weight-horizontal.png?raw=true" height="360" />  <img src="https://github.com/learning-android-pe/training-resources/blob/master/samples/ui/layou-linear-weight-vertical.png?raw=true" height="360" />
+- CursorAdapter , este es usado cuando interactuamos con base de datos.
 
-- RelativeLayout
+## Custom Adapters
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/relativelayout.png?raw=true" height="300" />
+Para nosotros poder construir una lista personalizada requerimos los siguientes pasos :
 
-- ConstraintLayout
+1. Origen de datos , no importa si esta colección viene de base de datos, de una archivo json o de la respuesta de la llamada a un servicio web . Al final , solo necesitamos este como una colección de Java : ArrayList, List o Array.
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/constraint-fail_2x.png?raw=true" height="300" /> <img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/constraint-fail-fixed_2x.png?raw=true" height="300" />
-
-- ListView & GridView
-
-<img src="https://developer.android.com/images/ui/listview.png?hl=es-419" height="300"/> <img src="https://developer.android.com/images/ui/gridview.png?hl=es-419" height="300"/>
-
-### Layout resources 
-
-- Box Model 
-
-![img](http://porterwebsites.com/wp-content/uploads/2016/10/boxmodel-image.png)
-
-- Margin / Padding
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/box-margin.png?raw=true" height="320" />   <img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/box-padding.png?raw=true" height="320"/>
-
-- Hexadecimal colors
-
-Podemos usar este web para buscar colores en hexadecimal
-http://www.color-hex.com/
-
-Android utiliza los colores en formato Hexadecimal , por ejemplo este valor representa el color 'negro'
+2. Entidad , normalmente nuestras celdas estarán relacionadas a entidades, es decir a un clase modelo que represente el contenido que se va a mostrar en una lista . Por ejemplo, si vamos a mostrar un listado de películas :
 
 ```java
-    #000000
+package com.androidbootcamp.androidtemplate.model;
+
+/**
+ * @author Eduardo Medina
+ */
+public class Movie {
+
+    private int id;
+    private String title;
+    private String desc;
+    private double price;
+    private boolean cartelera;
+
+    public Movie(int id, String title, String desc, double price, boolean cartelera) {
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        this.price = price;
+        this.cartelera = cartelera;
+    }
+
+    public Movie(String title, boolean cartelera) {
+        this.title = title;
+        this.cartelera = cartelera;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isCartelera() {
+        return cartelera;
+    }
+
+    public void setCartelera(boolean cartelera) {
+        this.cartelera = cartelera;
+    }
+}
 ```
-Para manejar la transparencia, agregamos uno de estos valores adelante del color. Por ejemplo, si queremos un color 'negro' con 70% de transparencia :
+3. La celda ,usualmente las celda que vamos a mostrar de nuestra lista, siempre es personalizada . Es decir, tendremos imágenes, textos , botones . Es deficil ver solo listas con textos, en las aplicaciones siempre vamos a tener listas con diseños personalizados . Para esto , nosotros podemos dibujar nuestras propias celdad usando XML
 
-```java
-    #B3000000
-```
-
-En esta tabla están todos los valores de 0-100 para la transparencia de colores
-
-```java
-
-    100% — FF
-    95% — F2
-    90% — E6
-    85% — D9
-    80% — CC
-    75% — BF
-    70% — B3
-    65% — A6
-    60% — 99
-    55% — 8C
-    50% — 80
-    45% — 73
-    40% — 66
-    35% — 59
-    30% — 4D
-    25% — 40
-    20% — 33
-    15% — 26
-    10% — 1A
-    5% — 0D
-    0% — 00
-
-```
-
-- Shapes 
-Estos componentes te permiten dibujar formas , sin necesidad de usar recursos de diseño (imágenes) , puedes realizar cuadrados, círculos y elementos con bordes redondeados.
-
-Por ejemplo, si requerimos crear un rectángulo con un color sólido de fondo :
-```java
-    <?xml version="1.0" encoding="utf-8"?>
-    <shape xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:shape="rectangle" >
-
-    <solid android:color="#58A023" />
-    </shape>
-```
-
-Ahora, si necesitamos agregarle bordes redondeandos
-
-```java
+```xml
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/blueskye"></solid>
-    <corners android:radius="10dp"></corners>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</shape>
+    <TextView
+        android:id="@+id/tviName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
+        android:text="Doctor Strange"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_movie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iviCartelera"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="4dp"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/ic_ticket"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"
+        android:layout_marginRight="4dp" />
+</android.support.constraint.ConstraintLayout>
+
 ```
-Resultado :
 
-<img src="/images/shape1.png" />
-
-
-### User Events
-
-  - Widgets
-  - User Events
-
-### UI components
-
-- Buttons
-- Checkboxes
-- Radio buttons
-- Campos de textos y labels
-- Spinners
-- Pickers
-
-Material design for Android https://developer.android.com/guide/topics/ui/look-and-feel/
-
-
-### Eventos
+4. El adapter , vamos a requerir construir un adapter para manipular una lista 
 
 ```java
- btnSignUp =(Button)findViewById(R.id.btnSignUp);
- 
- ...
- 
-   btnSignUp.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //action
+
+package com.androidbootcamp.androidtemplate.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.androidbootcamp.androidtemplate.R;
+
+
+/**
+ * Created by emedinaa on 15/10/15.
+ */
+public class SimpleListAdapter extends BaseAdapter {
+
+    private Context context;
+    private String[] data;
+
+    public SimpleListAdapter(Context context, String[] data) {
+        this.context=context;
+        this.data= data;
+    }
+
+    @Override
+    public int getCount() {
+        return data.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return data[position];
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
+        if (convertView == null) {
+            view = LayoutInflater.from(this.context).inflate(R.layout.row_list,parent,false);
+        } else {
+            view = convertView;
         }
-  });
+        TextView  tviTitle=view.findViewById(R.id.tviTitle);
+        tviTitle.setText(data[position]);
+        return view;
+    }
+}
 ```
+5. Asociar nuestro adapter con el componente visual
 
 ```java
-  rbGenero.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-              @Override
-              public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                  switch (checkedId) {
-                      case R.id.rbM:
-                          genero = 1;
-                          break;
-                      case R.id.rbF:
-                          genero = 2;
-                          break;
-                  }
-              }
-  });
+ private String[] mDays = {"Monday", "Tuesday","Wednesday","Thursday","Friday",
+"Saturday", "Sunday"};
+  ...
+  
+  listViewSimple= findViewById(R.id.listViewSimple);
+
+  SimpleListAdapter mySimpleListAdapter= new SimpleListAdapter(this,
+          mDays);
+  lviSimple.setAdapter(mySimpleListAdapter);
 ```
+
+## RecyclerView
+
+<img src="https://developer.android.com/training/material/images/RecyclerView.png" />
+
+## Events
+
+Si es un ListView o GridView , contamos un evento para saber si seleccionamos un item de la lista
 
 ```java
-
-  spLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                  Log.v("CONSOLE", "spLocation" + adapterView.getAdapter().getItem(i));
-                  localidad = adapterView.getAdapter().getItem(i).toString();
-              }
-
-              @Override
-              public void onNothingSelected(AdapterView<?> adapterView) {
-
-              }
-          });
-  }
+ listViewMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Movie movie =(Movie) adapterView.getAdapter().getItem(position);
+                String message= movie.getTitle()+ " "+ movie.isCartelera();
+                //String.format("title %s cartela %s ",movie.getTitle(),String.valueOf(movie.isCartelera()) );
+                showItem(message);
+            }
+});
 ```
 
-### Activities
+Si es un recyclerView , no contamos con un listener por defecto , pero agregué unas clases que nos pueden ayudar con esto :
 
-- Crear una actividad llamada LogInActivity e implementar el siguiente diseño utilizando : LinearLayout, RelativeLayout y ConstraintLayout . Considerar el uso de colores en hexadecimal y manejar la carpeta *res* para registrar los colores, textos e imagenes.
+```java
+   recyclerViewPokemon.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerViewPokemon, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                if(pokemonList!=null){
+                    Pokemon pokemon= pokemonList.get(position);
+                    goToDetails(pokemon);
+                }
+            }
 
- <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/logIn_sample.png" height="480">
-
-- Considerar los siguientes recursos
-
-res/values/colors.xml
-
+            @Override
+            public void onLongClick(View view, int position) {}
+}));
 ```
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="gray">#CCCCCC</color>
-    <color name="green">#8AB68C</color>
-    <color name="lightGray">#EEEEEE</color>
-```
-
-res/values/strings.xml
-
-```
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="sign_in">Sign in</string>
-```
-res/drawable/
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/ic_instagram_logo.png" height="240">
-
 ## Samples
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-01.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-02.png?raw=true" height="320"/>
 
-En el directorio de este proyecto contamos con los proyectos
-
-- JavaSamples
-
-- UISamples
-
-- UIEvents
-
-- NavigationSamples
-
-- DialogSamples
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/logIn_sample2.png" height="480"> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/login_sample3.png" height="480">
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/login_sample4.png" height="480"> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/relative_sample.png" height="480">
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson3/images/constraint_layout_sample.png" height="480">
-
-y la carpeta "exercises" , donde encontrarán ejercicios que pueden realizar relacionados a UI y Layouts.
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/ui-events.png" height="360" /> 
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/ui-events2.png" height="360" /> 
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-03.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-04.png?raw=true" height="320"/>
 
 
-- DialogSamples
+## Exercises
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/dialogs-1.png" height="360" /> <img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/dialogs-2.png" height="360" /> 
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/AdapterBasic-I.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/AdapterBasic-II.png?raw=true" height="320"/>
 
-- NavigationSamples
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/AdapterBasic-III.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/AdapterBasic-IV.png?raw=true" height="320"/>
 
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/navigation1.png" height="360" /> <img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/navigation-2.png" height="360" />
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/AdapterBasic-V.png?raw=true" height="320"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/Adapters-I.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/Adapters-II.png?raw=true" height="320"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/Adapters-III.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/Adapters-IV.png?raw=true" height="320"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/Adapters-V.png?raw=true" height="320"/>
 
 ## Homework
 
-- Realizar los ejercicios 6, 7, 9. * Utilizar recursos de diseño similares.
-- Realizar los ejercicios 2,3,4  utilizando solo ConstraintLayout.
+- Realizar los ejercicios AdapterBasic3,AdapterBasic-IV y Adapters-III. https://github.com/emedinaa/amoviles-android-basic-intermediate/tree/Lesson3/exercises
 
-## Resources
+## Resources 
 
-### Java
+Adapter https://developer.android.com/reference/android/widget/Adapter.html
 
-- Java Programming Fundamentals https://www.udemy.com/java-programming-fundamentals/
+ListView https://developer.android.com/guide/topics/ui/layout/listview.html
 
-- Java Fundamentals Language https://www.pluralsight.com/courses/java-fundamentals-language
+GridView https://developer.android.com/guide/topics/ui/layout/gridview.html
 
-- Java Programming Basics https://www.udacity.com/course/java-programming-basics--ud282
+RecyclerView https://developer.android.com/guide/topics/ui/layout/recyclerview.html
 
-- Java Fundamentals for Android Development https://www.edx.org/es/course/java-fundamentals-android-development-galileox-caad001x-2
+Creating List and Cards https://developer.android.com/training/material/lists-cards.html
 
-- The Java tutorials https://docs.oracle.com/javase/tutorial/java/index.html
+RecyclerView https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
 
-- Java Programming https://www.youtube.com/watch?v=Hl-zzrqQoSE&list=PLFE2CE09D83EE3E28
-
-- Google Java Style Guide https://google.github.io/styleguide/javaguide.html
-
-- Online Java IDE https://www.compilejava.net/
-
-### Android Developers
-
-- Entorno de desarrollo https://developer.android.com/studio/index.html?hl=es-419
-
-- Android Developers - Desarrollo https://developer.android.com/develop/index.html
-
-- Ejemplos de Android  https://developer.android.com/samples/
-
-- Primer proyecto Android https://developer.android.com/training/basics/firstapp/creating-project.html?hl=es-419
-
-- Codelab - primera android app con Java https://codelabs.developers.google.com/codelabs/build-your-first-android-app/index.html?index=..%2F..%2Findex
-
-- Codelab - primera android app con Kotlin https://codelabs.developers.google.com/codelabs/build-your-first-android-app-kotlin/index.html?index=..%2F..%2Findex
-
-- Android Tool Time https://www.youtube.com/watch?v=0n9sBgds-Hs&list=PLWz5rJ2EKKc_w6fodMGrA1_tsI3pqPbqa
-
-- Canal oficial en Youtube para Android Developers https://www.youtube.com/user/androiddevelopers
-
-- Books Android Developers http://fragmentedpodcast.com/tag/books/
-
-### Android User Interface
-
-- User Interface & Navigation https://developer.android.com/guide/topics/ui/
-
-- Layouts https://developer.android.com/guide/topics/ui/declaring-layout
-
-- ConstraintLayout https://developer.android.com/reference/android/support/constraint/ConstraintLayout
-
-- ConstraintLayout 1.1 https://medium.com/google-developers/introducing-constraint-layout-1-1-d07fc02406bc
-
-- Understanding the performance benefits of ConstraintLayout  https://android-developers.googleblog.com/2017/08/understanding-performance-benefits-of.html
-
-- CodeLab ConstraintLayout https://codelabs.developers.google.com/codelabs/constraint-layout/
-
-- Layouts https://developer.android.com/guide/topics/ui/declaring-layout.html
-
-- User Interface https://developer.android.com/guide/topics/ui/index.html
-
-- Layout Editor https://developer.android.com/studio/write/layout-editor.html
-
-- LinearLayout https://developer.android.com/guide/topics/ui/layout/linear.html
-
-- RelativeLayout https://developer.android.com/guide/topics/ui/layout/relative.html
-
-- ConstraintLayout https://developer.android.com/training/constraint-layout/index.html
-
-## Android UI Events
-
-- User Events https://developer.android.com/guide/topics/ui/ui-events.html
-
-- Controles de entrada https://developer.android.com/guide/topics/ui/controls.html
-
-- Android Design https://developer.android.com/design/
-
-- Material Design for Android https://developer.android.com/guide/topics/ui/look-and-feel/
-
-- Recursos de diseño  https://www.uplabs.com/
-
-- Material design kit https://materialdesignkit.com/templates/
-
-- KeyEvent https://developer.android.com/reference/android/view/KeyEvent
-
-### Android Design
-
-- Recursos de diseño https://www.uplabs.com/
-
-- Iconos https://www.iconfinder.com/
-
-- Android Inspired UI http://android.inspired-ui.com/
-
-- Drawable Resources https://developer.android.com/guide/topics/resources/drawable-resource.html
-
-- Device compatibility https://developer.android.com/guide/practices/compatibility
-
-- Material colors https://www.materialui.co/colors
-
-### Tools
-
-- Intellij IDEA https://www.jetbrains.com/idea/
-
-- Android Studio https://developer.android.com/studio/index.html?hl=es-419
-
-- Sublime text https://www.sublimetext.com/
+Android Developers Fundamentals Course - Create a RecyclerView https://google-developer-training.gitbooks.io/android-developer-fundamentals-course-practicals/content/en/Unit%202/44_p_create_a_recycler_view.html
