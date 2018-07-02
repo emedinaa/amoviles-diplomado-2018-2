@@ -11,10 +11,11 @@ public class ArrayListInitialization {
         ArrayList<String> languages = new ArrayList<String>(
                 Arrays.asList("Clojure", "Groovy", "JRuby", "Jython","Kotlin","Scala"));
 
-        showList(languages);
+        //showList(languages);
         //JVM Languages [Clojure, Groovy, JRuby, Jython, Kotlin, Scala]
 
         ArrayList<String> languages1 = new ArrayList<String>(){{
+
             add("Clojure");
             add("Groovy");
             add("JRuby");

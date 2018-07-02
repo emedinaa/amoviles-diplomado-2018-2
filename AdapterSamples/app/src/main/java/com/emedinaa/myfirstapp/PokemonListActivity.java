@@ -23,6 +23,12 @@ public class PokemonListActivity extends BaseActivity  {
     private List<Pokemon> pokemonList;
     private PokemonAdapter pokemonAdapter;
 
+    //1. Origin de datos pokemonList
+    //2. View - RecyclerView
+    //3. Celda - row_pokemon.xml
+    //4. Entidad - Pokemon
+    //5. Adapter - PokemonAdapter
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

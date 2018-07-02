@@ -26,6 +26,7 @@ public class ArrayListLoop {
             System.out.println(languages.get(i));
         }
         System.out.println("\n");
+
         System.out.println("foreach ------- \n");
         //for
         for (String language : languages) {
@@ -33,13 +34,14 @@ public class ArrayListLoop {
         }
 
         System.out.println("\n");
+        /*
         System.out.println("while ------- \n");
         //while
         int count = 0;
         while (languages.size() > count) {
             System.out.println(languages.get(count));
             count++;
-        }
+        }*/
     }
 
     public static void showList(Object object){

@@ -53,7 +53,7 @@ public class SimpleListActivity extends BaseActivity {
                 R.layout.row_simple_list, Data.movies));*/
 
         SimpleListAdapter mySimpleListAdapter= new SimpleListAdapter(this,
-                mDays);
+                mMonths);
         listViewSimple.setAdapter(mySimpleListAdapter);
 
         //events

@@ -8,8 +8,11 @@ import com.emedinaa.myfirstapp.adapters.SimpleListAdapter;
 
 public class AdapterBasicIActivity extends BaseActivity {
 
-    private String[] items={"Item1","Item2","Item3",
+    private String[] items1={"Item1","Item2","Item3",
     "Item 4", "Item 5", "Item 6", "Item 7"};
+
+    private String[] items={"Lunes","Martes","Miercoles",
+    "Jueves", "Viernes", "Sab", "Domingo"};
 
     private ListView listView;
 
@@ -27,5 +30,12 @@ public class AdapterBasicIActivity extends BaseActivity {
         SimpleListAdapter simpleListAdapter= new
                 SimpleListAdapter(this,items);
         listView.setAdapter(simpleListAdapter);
+
+        //1. Origen de datos - String[] items
+        //2. View - ListView
+        //3. Row - row_simple_list.xml ????
+        //4. Adapter - simpleListAdapter
+        //5. Setear adapter a listview
+
     }
 }

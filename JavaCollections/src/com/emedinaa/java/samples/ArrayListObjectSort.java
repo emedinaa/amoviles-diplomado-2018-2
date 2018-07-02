@@ -21,6 +21,7 @@ public class ArrayListObjectSort {
         users.add(new User(104,"James Gosling",63, "James Gosling, lead developer of Java and its precursor, Oak."));
 
         showList(users);
+        //Collections.sort(users);
         //user User{id=100, name='Bjarne Stroustrup', age=67, info='Bjarne Stroustrup, developer of C++.'}
         //user User{id=101, name='Chris Lattner', age=40, info='Chris Lattner, creator of Swift and LLVM.'}
         //user User{id=102, name='Guido van Rossum', age=62, info='Guido van Rossum, creator of Python.'}

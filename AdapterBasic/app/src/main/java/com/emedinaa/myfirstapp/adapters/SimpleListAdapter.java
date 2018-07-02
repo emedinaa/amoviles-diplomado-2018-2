@@ -15,7 +15,7 @@ import com.emedinaa.myfirstapp.R;
  */
 public class SimpleListAdapter extends BaseAdapter {
 
-    private Context context;
+    private final Context context;
     private String[] data;
 
     public SimpleListAdapter(Context context, String[] data) {

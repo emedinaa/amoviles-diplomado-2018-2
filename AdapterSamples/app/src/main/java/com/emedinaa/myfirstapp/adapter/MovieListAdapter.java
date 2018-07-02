@@ -68,10 +68,15 @@ public class MovieListAdapter extends BaseAdapter {
         }else{
             iviCartelera.setVisibility(View.GONE);
         }
+        /*if(cartelera){
+            iviCartelera.setVisibility(View.VISIBLE);
+        }else{
+            iviCartelera.setVisibility(View.GONE);
+        }*/
 
         if(position==0){
             tviTitle.setTextColor(Color.GREEN);
-        }else{
+        }else {
             tviTitle.setTextColor(Color.BLACK);
         }
 
