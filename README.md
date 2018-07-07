@@ -1,7 +1,7 @@
 # amoviles-diplomado-2018-2
 Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles 
 
-## Lesson 3 - Saturday, 30th June, 2018
+## Lesson 4 - Saturday, 7th July, 2018
 
 - Review
 
@@ -17,106 +17,371 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ### ¿Qué temas vimos en la clase pasada ?
 
-- Layouts : LinearLayout , RelativeLayout
-
-- Android Resources
-
-- Android Manifest
-
-- POO Java
+- Adapters, Custom Adapters
+- ListView,GridView , RecyclerView
+- Java Collections
 
 ### Activities
 
-- Completemos los ejemplos de la clase anterior , UISamples, UIEvents https://github.com/emedinaa/amoviles-diplomado-2018-2/tree/Lesson2-ui
+- Completemos los ejemplos de la clase anterior , AdapterSamples https://github.com/emedinaa/amoviles-diplomado-2018-2/tree/Lesson3-adapter-recyclerview
+
+- Hagamos una lista de productos , para lo cual deben de crear los siguiente:
+
+    - Una entidad llamada Product
+    - Una celda en xml, ustedes decidan que parámetros van a mostrar
+    - Crear un custom adapter
+    - Mostrar la lista con los productos cargados
+    - Pueden encontrar imágenes para los productos en iconfinder.com https://www.iconfinder.com/search/?q=products&price=free
+    
+- ¿Dónde lanzar los eventos en las listas ? 
+
+<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/adapter-events-I.png?raw=true" height="480"/>
+
+<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/adapter-events-II.png?raw=true" height="480"/>
 
 ## Lesson
-
-• Conocer el uso de RecyclerView y Adapter
-
-• Implementar listas personalizadas
-
-• Mejorando el aspecto de los amplicativos usando
-CardView
-
-• Material Design II
-
-• Uso de control de versiones (Git)
 
 • Conocer el uso de Fragment
 
 • Implementar Frament dinámicos o estáticos
 
-## RecyclerView & Adapters
+• Objetos de Navegación
 
-  - Adapters
-  - Custom Adapters
-  - RecyclerView
-  - Events
-  - Exercises
+• Interfaz de usuario (pestanas / Tabs)
 
-## Adapters
-<img src="https://camo.githubusercontent.com/fc6df9d5fd6d78e48d6802c77ad7264a6a787672/68747470733a2f2f692e696d6775722e636f6d2f6d6b38324a64322e6a7067" />
+• Gestión de Preferencia (Sharedpreferences)
 
-Los Adapters son los intermediarios entre el origen de datos y el componente visual.
-Respecto al origen de datos , contamos con los siguiente componentes :
-- List
-- ArrayList
-- Array
+• Android permission system
 
-y a los componentes visuales, tenemos :
+• Tareas en segundo plano - AsyncTask
 
-- ListView
-- GridView
-- RecyclerView
+• Conocer las características de la base de datos
+con Sqlite
 
-Los Adapters son los que asocian la colección de datos con las  celdas de nuestras vistas , tambien te permiten realizar cambios sobre ellas. Es decir, agregar, modificar o eliminar un elemento de nuestra lista .
+• Desarrollar aplicaciones Android haciendo uso
+de la base de datos
 
-ListView & GridView
+• Inserción, actualización y eliminación de
+registros (CRUD)
 
-<img src="https://developer.android.com/images/ui/listview.png" /> <img src="https://developer.android.com/images/ui/gridview.png" />
+### Fragments, conceptos y comunicación.
 
-Tipos :
+- Fragments
 
-Se dispone de los siguientes tipos de adapters
-- BaseAdapter , cuando necesitemos manejar alguna lista desde cero , recomiendo utilizarlo . Usualmente solicita implementar varios métodos.
+- Creating a Fragment
 
-- ArrayAdapter , este es un adapter que nos puede servir de base y solo requiere implementar un método.
+- Fragment Lifecycle
 
-- CursorAdapter , este es usado cuando interactuamos con base de datos.
+- Communicating with the Activity
 
-## Custom Adapters
+- Communication between Fragments
 
-Para nosotros poder construir una lista personalizada requerimos los siguientes pasos :
+- Exercises
 
-1. Origen de datos , no importa si esta colección viene de base de datos, de una archivo json o de la respuesta de la llamada a un servicio web . Al final , solo necesitamos este como una colección de Java : ArrayList, List o Array.
+### Conociendo los Fragments
 
-2. Entidad , normalmente nuestras celdas estarán relacionadas a entidades, es decir a un clase modelo que represente el contenido que se va a mostrar en una lista . Por ejemplo, si vamos a mostrar un listado de películas :
+Los fragmentos son vistas con código y diseño(XML) , no necesitan ser registrados en el AndroidManifest y requieren de una actividad como contenedor. Se pueden agregar o quitar a demanda  y tambien cuentan con su propio ciclo de vida. 
+Adicional, una actividad puede contener más de un fragment, es decir , por ejemplo, en una pantalla puede tener 2 fragments.
+Los fragments se usan para construir componentes reusables, evitando duplicación de recursos y de código , además se usa mucho cuando es requerido que una aplicación funcione tanto en un smartphone y tablets.
+
+![fragments](https://developer.android.com/images/training/basics/fragments-screen-mock.png)
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/images/fragments03.png?raw=true" height="480"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/images/fragments04.png?raw=true" height="480"/>
+
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/images/fragments05.png?raw=true" height="480"/>
+
+
+### Creando un Fragment
+
+<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments.png?raw=true" height="480"/>
 
 ```java
-package com.androidbootcamp.androidtemplate.model;
+    import android.os.Bundle;
+    import android.support.v4.app.Fragment;
+    import android.view.LayoutInflater;
+    import android.view.ViewGroup;
 
-/**
- * @author Eduardo Medina
- */
-public class Movie {
+    public class ArticleFragment extends Fragment {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.article_view, container, false);
+        }
+    }
+```
 
-    private int id;
-    private String title;
-    private String desc;
-    private double price;
-    private boolean cartelera;
+Una vez creado un fragment, este puede ser insertado como cualquier componente de diseño 
 
-    public Movie(int id, String title, String desc, double price, boolean cartelera) {
-        this.id = id;
-        this.title = title;
-        this.desc = desc;
-        this.price = price;
-        this.cartelera = cartelera;
+```xml
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="horizontal"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+
+      <fragment android:name="com.example.android.fragments.HeadlinesFragment"
+                android:id="@+id/headlines_fragment"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+      <fragment android:name="com.example.android.fragments.ArticleFragment"
+                android:id="@+id/article_fragment"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+</LinearLayout>
+
+```
+
+Para poder insertar el Fragment en un activity por programación
+
+```java
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+
+public class MainActivity extends FragmentActivity {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.news_articles);
+
+        // Check that the activity is using the layout version with
+        // the fragment_container FrameLayout
+        if (findViewById(R.id.fragment_container) != null) {
+
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            // Create a new Fragment to be placed in the activity layout
+            HeadlinesFragment firstFragment = new HeadlinesFragment();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            firstFragment.setArguments(getIntent().getExtras());
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, firstFragment).commit();
+        }
+    }
+}
+```
+
+Otra opción podría ser reemplazar un fragment por otro , para lo cual :
+
+```java
+  // Create fragment and give it an argument specifying the article it should show
+  ArticleFragment newFragment = new ArticleFragment();
+  Bundle args = new Bundle();
+  args.putInt(ArticleFragment.ARG_POSITION, position);
+  newFragment.setArguments(args);
+
+  FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+  // Replace whatever is in the fragment_container view with this fragment,
+  // and add the transaction to the back stack so the user can navigate back
+  transaction.replace(R.id.fragment_container, newFragment);
+  transaction.addToBackStack(null);
+
+  // Commit the transaction
+  transaction.commit();
+```
+
+### Ciclo de un vida de un Fragment
+
+![fragments](https://developer.android.com/guide/components/images/activity_lifecycle.png)
+
+### Comunicación 
+
+Para poder comunicar un fragment con una actividad(padre) o con otro fragment , usamos interfaces como canal de comunicación
+
+```java
+    public class HeadlinesFragment extends ListFragment {
+        OnHeadlineSelectedListener mCallback;
+
+        // Container Activity must implement this interface
+        public interface OnHeadlineSelectedListener {
+            public void onArticleSelected(int position);
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+
+            // This makes sure that the container activity has implemented
+            // the callback interface. If not, it throws an exception
+            try {
+                mCallback = (OnHeadlineSelectedListener) activity;
+            } catch (ClassCastException e) {
+                throw new ClassCastException(activity.toString()
+                        + " must implement OnHeadlineSelectedListener");
+            }
+        }
+
+        ...
+    }
+```
+
+La interface puede ser creada de manera independiente o asociada a una actividad con la que se requiere comunicarse
+
+```java
+  public static class MainActivity extends Activity
+          implements HeadlinesFragment.OnHeadlineSelectedListener{
+      ...
+
+      public void onArticleSelected(int position) {
+          // The user selected the headline of an article from the HeadlinesFragment
+          // Do something here to display that article
+      }
+  }
+
+```
+
+Enviar parámetros a un Fragment, para lo cual usamos la clase "Bundle"
+
+```java
+public static class MainActivity extends Activity
+        implements HeadlinesFragment.OnHeadlineSelectedListener{
+    ...
+
+    public void onArticleSelected(int position) {
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+
+        ArticleFragment articleFrag = (ArticleFragment)
+                getSupportFragmentManager().findFragmentById(R.id.article_fragment);
+
+        if (articleFrag != null) {
+            // If article frag is available, we're in two-pane layout...
+
+            // Call a method in the ArticleFragment to update its content
+            articleFrag.updateArticleView(position);
+        } else {
+            // Otherwise, we're in the one-pane layout and must swap frags...
+
+            // Create fragment and give it an argument for the selected article
+            ArticleFragment newFragment = new ArticleFragment();
+            Bundle args = new Bundle();
+            args.putInt(ArticleFragment.ARG_POSITION, position);
+            newFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();
+        }
+    }
+}
+```
+Comunicación Activity con Fragment
+
+<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments-communication1.png?raw=true" height="480"/>
+
+Comunicación Fragment con Activity
+
+<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments-communication2.png?raw=true" height="480"/>
+
+Comunicación Fragment con Fragment
+
+<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments-communication3.png?raw=true" height="480"/>
+
+## Storage Options
+
+- (en)https://developer.android.com/guide/topics/data/data-storage
+- (es)https://developer.android.com/guide/topics/data/data-storage?hl=es-419
+
+## DB Sqlite
+
+Otra forma de persistir información es usando una base de datos local (SQLITE), donde puedes usar el lenguaje SQL y realizar las operaciones que necesites para manejar una BD en tu APP.
+
+Lo primero, es crear una BD, donde definimos el nombre y versión, asi como las tablas
+
+```java
+package com.belatrix.kotlintemplate.storage;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class MyDatabase extends SQLiteOpenHelper {
+
+
+    public static final int DATABASE_VERSION = 1;
+ 
+    public static final String DATABASE_NAME = "BDNote";
+ 
+    public static final String TABLE_NOTES = "tb_notes";
+    
+    //Columnas de la Tabla Notes
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_DESC = "desc";
+    public static final String KEY_PATH = "path";
+    
+    
+    public MyDatabase(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // TODO Auto-generated method stub
+        String sql= "CREATE TABLE " + TABLE_NOTES + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + KEY_NAME + " TEXT,"
+                + KEY_DESC + " TEXT,"
+                + KEY_PATH + " TEXT" + ")";
+        db.execSQL(sql);
     }
 
-    public Movie(String title, boolean cartelera) {
-        this.title = title;
-        this.cartelera = cartelera;
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO Auto-generated method stub
+        String sql= "DROP TABLE IF EXISTS " + TABLE_NOTES;
+        db.execSQL(sql);
+    }
+
+}
+```
+Con la BD creada , requerimos definir una entidad que represente a un de las tablas y otra clase para manejar las operaciones sobre ella (CRUD)
+
+Entidad :
+
+```java
+public class NoteEntity implements Serializable {
+
+    private int id;
+    private String name;
+    private String description;
+    private String path;
+
+    public NoteEntity() {
+    }
+
+    public NoteEntity(int id, String name, String description, String path) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.path = path;
+    }
+
+    public NoteEntity(String name, String description, String path) {
+        this.name = name;
+        this.description = description;
+        this.path = path;
     }
 
     public int getId() {
@@ -127,250 +392,230 @@ public class Movie {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public double getPrice() {
-        return price;
+    public String getPath() {
+        return path;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public boolean isCartelera() {
-        return cartelera;
-    }
-
-    public void setCartelera(boolean cartelera) {
-        this.cartelera = cartelera;
+    @Override
+    public String toString() {
+        return "NoteEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", path='" + path + '\'' +
+                '}';
     }
 }
 ```
-3. La celda ,usualmente las celda que vamos a mostrar de nuestra lista, siempre es personalizada . Es decir, tendremos imágenes, textos , botones . Es deficil ver solo listas con textos, en las aplicaciones siempre vamos a tener listas con diseños personalizados . Para esto , nosotros podemos dibujar nuestras propias celdad usando XML
 
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <TextView
-        android:id="@+id/tviName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:padding="10dp"
-        android:text="Doctor Strange"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/ic_movie"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iviCartelera"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="4dp"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/ic_ticket"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible"
-        android:layout_marginRight="4dp" />
-</android.support.constraint.ConstraintLayout>
-
-```
-
-4. El adapter , vamos a requerir construir un adapter para manipular una lista 
+Operaciones (CRUD)
 
 ```java
+public class CRUDOperations {
 
-package com.androidbootcamp.androidtemplate.adapter;
+    private MyDatabase helper;
+    public CRUDOperations(SQLiteOpenHelper _helper) {
+        super();
+        // TODO Auto-generated constructor stub
+        helper =(MyDatabase)_helper;
+}
+...
+```
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
+Por ejemplo, para agregar un registro
 
-import com.androidbootcamp.androidtemplate.R;
+```java
+  public void addNote(NoteEntity noteEntity)
+    {
+       SQLiteDatabase db = helper.getWritableDatabase(); //modo escritura
+       ContentValues values = new ContentValues();
+       values.put(MyDatabase.KEY_NAME, noteEntity.getName());
+       values.put(MyDatabase.KEY_DESC, noteEntity.getDescription());
+       values.put(MyDatabase.KEY_PATH, noteEntity.getPath());
 
+       db.insert(MyDatabase.TABLE_NOTES, null, values);
+       db.close();
+  }
+```
 
-/**
- * Created by emedinaa on 15/10/15.
- */
-public class SimpleListAdapter extends BaseAdapter {
+Editar un registro
 
-    private Context context;
-    private String[] data;
+```java
+public int updateNote(NoteEntity noteEntity)
+    {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(MyDatabase.KEY_NAME, noteEntity.getName());
+        values.put(MyDatabase.KEY_DESC, noteEntity.getDescription());
+        values.put(MyDatabase.KEY_PATH, noteEntity.getPath());
 
-    public SimpleListAdapter(Context context, String[] data) {
-        this.context=context;
-        this.data= data;
-    }
+        int row =db.update(MyDatabase.TABLE_NOTES,
+                values,
+                MyDatabase.KEY_ID+"=?",
+                new String[]{String.valueOf(noteEntity.getId())});
+        db.close();
 
-    @Override
-    public int getCount() {
-        return data.length;
-    }
+        return row;
+}
+```
 
-    @Override
-    public Object getItem(int position) {
-        return data[position];
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        if (convertView == null) {
-            view = LayoutInflater.from(this.context).inflate(R.layout.row_list,parent,false);
-        } else {
-            view = convertView;
+Obtener un registro
+```java
+public NoteEntity getNote(int id)
+    {
+        SQLiteDatabase db = helper.getReadableDatabase(); //modo lectura
+        Cursor cursor = db.query(MyDatabase.TABLE_NOTES,
+                new String[]{MyDatabase.KEY_ID, MyDatabase.KEY_NAME,
+                        MyDatabase.KEY_DESC, MyDatabase.KEY_PATH},
+                MyDatabase.KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null);
+        if(cursor!=null)
+        {
+            cursor.moveToFirst();
         }
-        TextView  tviTitle=view.findViewById(R.id.tviTitle);
-        tviTitle.setText(data[position]);
-        return view;
-    }
+        int nid = Integer.parseInt(cursor.getString(0));
+        String name = cursor.getString(1);
+        String desc = cursor.getString(2);
+        String path = cursor.getString(3);
+
+        NoteEntity noteEntity= new NoteEntity(
+                nid, name, desc,path);
+        db.close();
+        return noteEntity;
 }
 ```
-5. Asociar nuestro adapter con el componente visual
+
+Obtener todos los registros
 
 ```java
- private String[] mDays = {"Monday", "Tuesday","Wednesday","Thursday","Friday",
-"Saturday", "Sunday"};
-  ...
-  
-  listViewSimple= findViewById(R.id.listViewSimple);
+public List<NoteEntity> getAllNotes()
+    {
+        List<NoteEntity> lst =new ArrayList<NoteEntity>();
+        String sql= "SELECT  * FROM " + MyDatabase.TABLE_NOTES;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                NoteEntity contact =new NoteEntity();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setDescription(cursor.getString(2));
+                contact.setPath(cursor.getString(3));
 
-  SimpleListAdapter mySimpleListAdapter= new SimpleListAdapter(this,
-          mDays);
-  lviSimple.setAdapter(mySimpleListAdapter);
+                lst.add(contact);
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        return lst;
+}
 ```
 
-## RecyclerView
-
-<img src="https://developer.android.com/training/material/images/RecyclerView.png" />
-
-## Events
-
-Si es un ListView o GridView , contamos un evento para saber si seleccionamos un item de la lista
+Borrar un registro
 
 ```java
- listViewMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Movie movie =(Movie) adapterView.getAdapter().getItem(position);
-                String message= movie.getTitle()+ " "+ movie.isCartelera();
-                //String.format("title %s cartela %s ",movie.getTitle(),String.valueOf(movie.isCartelera()) );
-                showItem(message);
-            }
-});
+  public int deleteNote(NoteEntity noteEntity)
+    {
+       SQLiteDatabase db = helper.getWritableDatabase(); 
+       int row= db.delete(MyDatabase.TABLE_NOTES,
+           MyDatabase.KEY_ID+"=?", 
+           new String[]{String.valueOf(noteEntity.getId())});
+       db.close();
+      return row;
+  }
 ```
 
-Si es un recyclerView , no contamos con un listener por defecto , pero agregué unas clases que nos pueden ayudar con esto :
+## SharedPreferences
+
+- Inicializar SharedPreferences
 
 ```java
-   recyclerViewPokemon.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerViewPokemon, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                if(pokemonList!=null){
-                    Pokemon pokemon= pokemonList.get(position);
-                    goToDetails(pokemon);
-                }
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {}
-}));
+Context context = getActivity();
+SharedPreferences sharedPref = context.getSharedPreferences(
+        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 ```
+- Guardar un valor
+
+```java
+SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+SharedPreferences.Editor editor = sharedPref.edit();
+editor.putInt(getString(R.string.saved_high_score_key), newHighScore);
+editor.commit();
+```
+
+- Obtener un valor
+```java
+SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+int defaultValue = getResources().getInteger(R.integer.saved_high_score_default_key);
+int highScore = sharedPref.getInt(getString(R.string.saved_high_score_key), defaultValue);
+```
+
 ## Samples
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-01.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-02.png?raw=true" height="320"/>
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-03.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/images/samples-04.png?raw=true" height="320"/>
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise1.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise2.png?raw=true" height="320"/>
 
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise3.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise5.png" height="320"/>
 
-## Exercises
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_color.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_contacts.png?raw=true" height="320"/>
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/AdapterBasic-I.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/AdapterBasic-II.png?raw=true" height="320"/>
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_message.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_tab.png?raw=true" height="320"/>
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/AdapterBasic-III.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/AdapterBasic-IV.png?raw=true" height="320"/>
+- FragmentSamples
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson7/images/fragment_samples.png?raw=true" height="480"/>
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/AdapterBasic-V.png?raw=true" height="320"/>
+- NavigationSamples
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson7/images/navigation_samples.png?raw=true" height="480"/>
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/Adapters-I.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/Adapters-II.png?raw=true" height="320"/>
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/Adapters-III.png?raw=true" height="320"/> <img src="https://github.com/BrainFriendly/ab-android-fundamentals/blob/L6RecyclerView-Adapters/exercises/Adapters-IV.png?raw=true" height="320"/>
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson5/exercises/Adapters-V.png?raw=true" height="320"/>
+- DBSamples
+<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson7/images/db_samples.png?raw=true" height="480"/>
 
 ## Homework
 
-- Realizar los ejercicios AdapterBasic3,AdapterBasic-IV y Adapters-III. https://github.com/emedinaa/amoviles-android-basic-intermediate/tree/Lesson3/exercises
+- Realizar los ejercicios  01, 02 sobre Fragments
 
 ## Resources 
 
-Adapter https://developer.android.com/reference/android/widget/Adapter.html
+- Fragment https://developer.android.com/reference/android/app/Fragment.html
 
-ListView https://developer.android.com/guide/topics/ui/layout/listview.html
+- Developer Guides : Fragments https://developer.android.com/guide/components/fragments.html
 
-GridView https://developer.android.com/guide/topics/ui/layout/gridview.html
+- Building a Dynamic UI with Fragments https://developer.android.com/training/basics/fragments/index.html
 
-RecyclerView https://developer.android.com/guide/topics/ui/layout/recyclerview.html
+- Storage Options https://developer.android.com/guide/topics/data/data-storage.html
 
-Creating List and Cards https://developer.android.com/training/material/lists-cards.html
+- Save Data using SQLite https://developer.android.com/training/data-storage/sqlite.html
 
-RecyclerView https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
+- Saving data in local database using Room https://developer.android.com/training/data-storage/room/index.html
 
-Android Developers Fundamentals Course - Create a RecyclerView https://google-developer-training.gitbooks.io/android-developer-fundamentals-course-practicals/content/en/Unit%202/44_p_create_a_recycler_view.html
+- ORMLite http://ormlite.com/
 
-Java Collections https://docs.oracle.com/javase/tutorial/collections/index.html
+- SugarORM http://satyan.github.io/sugar/
 
-Java ArrayList https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html
+- Realm https://realm.io/docs
 
+- Save Key-Value Data with SharedPreferences https://developer.android.com/training/data-storage/shared-preferences.html#java
+
+- Save Data using SQLite https://developer.android.com/training/data-storage/sqlite.html
+
+- Material icons https://material.io/tools/icons/?style=baseline
