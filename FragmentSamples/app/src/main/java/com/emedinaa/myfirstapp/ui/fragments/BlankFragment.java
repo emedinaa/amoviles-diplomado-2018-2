@@ -104,9 +104,16 @@ public class BlankFragment extends Fragment {
         textViewMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Mensaje desde Fragment",Toast.LENGTH_LONG).show();
+               Toast.makeText(getActivity(),"Mensaje desde Fragment",Toast.LENGTH_LONG).show();
+
+                //((FragmentBasicActivity)getActivity()).actionFragment(null);
+                //FragmentBasicActivity.llamarAPapa();
+                if(mListener!=null){
+                    mListener.cerrarSesion();
+                }
             }
         });
+
 
         //FragmentBasicActivity.llamarAPapa();
 
@@ -115,9 +122,9 @@ public class BlankFragment extends Fragment {
         //( (FragmentBasicActivity)(getActivity())).llamarAPapa2();
         //FragmentBasicActivity.llamarAPapa();
 
-        if(mListener!=null){
+        /*if(mListener!=null){
             mListener.callToActivity(null);
-        }
+        }*/
 
         /*getView().findViewById(R.id.textViewMessage).setOnClickListener(new View.OnClickListener() {
             @Override

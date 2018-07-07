@@ -2,6 +2,7 @@ package com.emedinaa.myfirstapp.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,18 +57,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 
         holder.tviTitle.setText(itemTitle);
 
-        /*holder.iviFavorite.setOnClickListener(new View.OnClickListener() {
+        holder.iviFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Item from Adapter "+
-                        item.toString(), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(context, "Item from Adapter "+
+                        item.toString(), Toast.LENGTH_SHORT).show();*/
+                //((ListItemsActivity)context).seleccioneItem(item);
 
-                //if(onItemListener!=null){
-                //    Log.v("ADAPTER", "iviPhoto "+holder.iviFavorite);
-                //    onItemListener.onItemClickListener(item);
-                //}
+                if(onItemListener!=null){
+                    Log.v("ADAPTER", "iviPhoto "+holder.iviFavorite);
+                    onItemListener.onItemClickListener(item);
+                }
             }
-        });*/
+        });
         /*holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

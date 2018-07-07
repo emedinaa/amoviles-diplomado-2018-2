@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.emedinaa.myfirstapp.adapters.ItemAdapter;
+import com.emedinaa.myfirstapp.listeners.OnItemListener;
 import com.emedinaa.myfirstapp.model.Item;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
  * @see : https://developer.android.com/index.html
  * @since : 7/7/18
  */
-public class ListItemsActivity extends AppCompatActivity {
+public class ListItemsActivity extends AppCompatActivity implements OnItemListener {
 
     private List<Item> items;
     private ItemAdapter adapter;
@@ -40,7 +41,8 @@ public class ListItemsActivity extends AppCompatActivity {
         items.add(new Item("Item 5"));
 
         //render items
-        adapter= new ItemAdapter(this,items);
+        //adapter= new ItemAdapter(this,items);
+        adapter= new ItemAdapter(this,this,items);
         recyclerView.setAdapter(adapter);
     }
 
@@ -68,5 +70,14 @@ public class ListItemsActivity extends AppCompatActivity {
 
     private void selectedItem(Item item){
         Toast.makeText(this, "item "+item.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void seleccioneItem(Item item){
+
+    }
+
+    @Override
+    public void onItemClickListener(Item item) {
+        Toast.makeText(this, "item adapter "+item.toString(), Toast.LENGTH_SHORT).show();
     }
 }

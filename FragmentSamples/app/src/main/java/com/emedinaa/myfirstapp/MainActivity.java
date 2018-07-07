@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.textView5).setOnClickListener(this);
         findViewById(R.id.textView6).setOnClickListener(this);
         findViewById(R.id.textView7).setOnClickListener(this);
+
+        //startActivity();
     }
 
     @Override

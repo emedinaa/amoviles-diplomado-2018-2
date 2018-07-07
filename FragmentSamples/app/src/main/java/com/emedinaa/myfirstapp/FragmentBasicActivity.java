@@ -27,9 +27,9 @@ implements BlankFragmentListener {
 
         blankFragment= (BlankFragment) fragmentManager.findFragmentById(R.id.blankFragment);
 
-        Log.v("CONSOLE", "(2) 1 Desde FragmentBasicActivity");
+        //Log.v("CONSOLE", "(2) 1 Desde FragmentBasicActivity");
         blankFragment.cambiarColorFondo();
-        //blankFragment.getView().findViewById(R.id.textViewMessage)
+        //blankFragment.getView().findViewById(R.id.textViewMessage);
 
         //blankFragment.ejecutarAccionDesdeFragment("Hola Fragment");
         //blankFragment.cambiarColorFondo();
@@ -39,6 +39,7 @@ implements BlankFragmentListener {
     @Override
     public void actionFragment(Object object) {
        //TODO REALIZAR ACCION
+        Toast.makeText(this, "Activity msg from fragment", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -56,7 +57,8 @@ implements BlankFragmentListener {
 
     @Override
     public void cerrarSesion() {
-
+        Toast.makeText(this,"Hola desde Fragment !",
+                Toast.LENGTH_LONG).show();
     }
 
     @Override
