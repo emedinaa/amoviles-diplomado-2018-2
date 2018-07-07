@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.emedinaa.myfirstapp.adapter.PokemonAdapter;
 import com.emedinaa.myfirstapp.data.PokemonData;
@@ -74,7 +75,14 @@ public class PokemonListActivity extends BaseActivity  {
     }
 
     private void goToDetails(Pokemon pokemon){
-        Intent intent= new Intent(this,PokemonDetailsActivity.class);
+        Toast.makeText(this,
+                "pokemon "+pokemon.toString(), Toast.LENGTH_SHORT).show();
+        Intent intent=
+                new Intent(this,PokemonDetailsActivity.class);
+        Bundle bundle= new Bundle();
+        bundle.putSerializable("POKEMON",pokemon);
+        intent.putExtras(bundle);
+
         startActivity(intent);
     }
 

@@ -43,6 +43,7 @@ public class PokemonDetailsActivity extends BaseActivity {
                 imageView.setTransitionName(imageTransitionName);
             }
 
+            //imageView.setTransitionName(imageTransitionName);
             imageView.setImageBitmap(getBitmapFromAssets(pokemon.getPhoto()));
             textViewName.setText(pokemon.getName());
         }
@@ -50,7 +51,10 @@ public class PokemonDetailsActivity extends BaseActivity {
 
     private void extras() {
         if(getIntent()!=null && getIntent().getExtras()!=null){
-            pokemon= (Pokemon) getIntent().getExtras().getSerializable("POKEMON");
+            Bundle bundle= getIntent().getExtras();
+            if(bundle.containsKey("POKEMON")){
+                pokemon= (Pokemon) getIntent().getExtras().getSerializable("POKEMON");
+            }
             imageTransitionName= getIntent().getExtras().getString("IMAGE_TRANSITION");
         }
     }
