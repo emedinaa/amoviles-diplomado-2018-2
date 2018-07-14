@@ -2,6 +2,7 @@
 package com.emedinaa.myfirstapp.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 
 public class PreferencesHelper {
@@ -10,9 +11,17 @@ public class PreferencesHelper {
     private static final String PREFERENCES_USERNAME = MYNOTES_PREFERENCES + ".username";
     private static final String PREFERENCES_PASSWORD = MYNOTES_PREFERENCES + ".password";
     private static final String PRODUCT_ID=MYNOTES_PREFERENCES+".productId";
+    private static final String PREFERENCES_COLOR=MYNOTES_PREFERENCES+".color";
 
     private PreferencesHelper() {
         //no instance
+    }
+
+    public static void clear(Context context){
+        SharedPreferences.Editor editor = getEditor(context);
+        editor.clear();
+        //editor.commit();
+        editor.apply();
     }
 
     public static void signOut(Context context) {
@@ -42,6 +51,23 @@ public class PreferencesHelper {
         final SharedPreferences preferences = getSharedPreferences(context);
         return preferences.contains(PREFERENCES_USERNAME) &&
                 preferences.contains(PREFERENCES_PASSWORD);
+    }
+
+    public static void saveColor(@NonNull  final Context context,
+                                 @NonNull String color){
+        SharedPreferences.Editor editor = getEditor(context);
+        editor.putString(PREFERENCES_COLOR,color);
+        editor.apply();
+    }
+
+    public static String getColor(@NonNull  final Context context){
+        SharedPreferences sharedPreferences= getSharedPreferences(context);
+        return sharedPreferences.getString(PREFERENCES_COLOR,null);
+    }
+
+    public static Boolean isColorSaved(@NonNull  final Context context){
+        final SharedPreferences preferences = getSharedPreferences(context);
+        return preferences.contains(PREFERENCES_COLOR);
     }
 
     private static SharedPreferences.Editor getEditor(Context context) {

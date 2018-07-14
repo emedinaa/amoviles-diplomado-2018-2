@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.emedinaa.myfirstapp.storage.PreferencesHelper;
+
 public class SharedPrefIActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button button,button2,button3,button4;
@@ -26,12 +28,25 @@ public class SharedPrefIActivity extends AppCompatActivity implements View.OnCli
                 "com.emedinaa.spexercises",
                 Context.MODE_PRIVATE);
         ui();
-        checkColor();
+
+        //checkColor();
+        checkColorHelper();
     }
 
+    private void checkColorHelper(){
+        if(PreferencesHelper.isColorSaved(this)){
+            currentColor= PreferencesHelper.getColor(this);
+            int colorValue= Color.parseColor(currentColor);
+            findViewById(R.id.frameLayout).setBackgroundColor(colorValue);
+        }
+    }
     private void checkColor(){
         currentColor= sharedPreferences.getString("COLOR",null);
         if(currentColor!=null){
+
+            Toast.makeText(this,"color guardado "+currentColor,
+                    Toast.LENGTH_LONG).show();
+
             int colorValue= Color.parseColor(currentColor);
             findViewById(R.id.frameLayout).setBackgroundColor(colorValue);
         }
@@ -75,10 +90,12 @@ public class SharedPrefIActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.button5:
-                save();
+                //save();
+                saveHelper();
                 break;
             case R.id.button6:
-                reset();
+                //reset();
+                resetHelper();
                 break;
         }
     }
@@ -97,6 +114,18 @@ public class SharedPrefIActivity extends AppCompatActivity implements View.OnCli
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("COLOR", currentColor);
         editor.apply();
+    }
+
+    private void saveHelper(){
+        if(currentColor==null)return;
+        PreferencesHelper.saveColor(this,currentColor);
+    }
+    private void resetHelper(){
+        //PreferencesHelper
+        currentColor=null;
+        int colorValue= Color.parseColor("#d4d4d4");
+        findViewById(R.id.frameLayout).setBackgroundColor(colorValue);
+        PreferencesHelper.clear(this);
     }
 
     private void reset(){
