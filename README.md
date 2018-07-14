@@ -19,62 +19,24 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 - xxxx
 
-### Activities
-
-- Completemos los ejemplos de la clase anterior , AdapterSamples https://github.com/emedinaa/amoviles-diplomado-2018-2/tree/Lesson3-adapter-recyclerview
-
-- Hagamos una lista de productos , para lo cual deben de crear los siguiente:
-
-    - Una entidad llamada Product
-    - Una celda en xml, ustedes decidan que parámetros van a mostrar
-    - Crear un custom adapter
-    - Mostrar la lista con los productos cargados
-    - Pueden encontrar imágenes para los productos en iconfinder.com https://www.iconfinder.com/search/?q=products&price=free
-    
-- ¿Dónde lanzar los eventos en las listas ? 
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/adapter-events-I.png?raw=true" height="480"/>
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/ui/adapter-events-II.png?raw=true" height="480"/>
-
 ## Lesson
 
-• Conocer el uso de Fragment
+• HTTP Request en web con Volley
 
-• Implementar Frament dinámicos o estáticos
+• Consumo de servicios JSON
 
-• Objetos de Navegación
-
-• Interfaz de usuario (pestanas / Tabs)
-
-• Gestión de Preferencia (Sharedpreferences)
-
-• Android permission system
-
-• Tareas en segundo plano - AsyncTask
-
-• Conocer las características de la base de datos
-con Sqlite
-
-• Desarrollar aplicaciones Android haciendo uso
-de la base de datos
+• Diseño de la capa service en Android Primeros
+pasos con Sqlite
 
 • Inserción, actualización y eliminación de
-registros (CRUD)
+registros
 
-### Fragments, conceptos y comunicación.
+• Consulta y recuperación de registros
 
-- Fragments
+• Diseño de la capa database en android
 
-- Creating a Fragment
-
-- Fragment Lifecycle
-
-- Communicating with the Activity
-
-- Communication between Fragments
-
-- Exercises
+• Creación de loaders para carga de datos
+desde la web
 
 ## Tools
 
