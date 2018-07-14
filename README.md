@@ -1,7 +1,7 @@
 # amoviles-diplomado-2018-2
 Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles 
 
-## Lesson 4 - Saturday, 7th July, 2018
+## Lesson 5 - Saturday, 14th July, 2018
 
 - Review
 
@@ -17,9 +17,7 @@ Curso de Aplicaciones Android con Java - Diplomado 2018 II - Academia Móviles
 
 ### ¿Qué temas vimos en la clase pasada ?
 
-- Adapters, Custom Adapters
-- ListView,GridView , RecyclerView
-- Java Collections
+- xxxx
 
 ### Activities
 
@@ -78,544 +76,306 @@ registros (CRUD)
 
 - Exercises
 
-### Conociendo los Fragments
+## Tools
 
-Los fragmentos son vistas con código y diseño(XML) , no necesitan ser registrados en el AndroidManifest y requieren de una actividad como contenedor. Se pueden agregar o quitar a demanda  y tambien cuentan con su propio ciclo de vida. 
-Adicional, una actividad puede contener más de un fragment, es decir , por ejemplo, en una pantalla puede tener 2 fragments.
-Los fragments se usan para construir componentes reusables, evitando duplicación de recursos y de código , además se usa mucho cuando es requerido que una aplicación funcione tanto en un smartphone y tablets.
+Vamos a utilizar algunas herramientas que nos permitan realizar pruebas de los servicios que vamos a consumir desde nuestra app.
 
-![fragments](https://developer.android.com/images/training/basics/fragments-screen-mock.png)
+- Postman
+Esta herramienta nos permite conectarnos a cualquier API Rest
+https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/images/fragments03.png?raw=true" height="480"/>
+- Visores de Json
+JsonEditor , nos permite ver de una manera más ordenada la tramas que recibimos de los servicios, que normalmente son JSON. http://jsoneditoronline.org/
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/images/fragments04.png?raw=true" height="480"/>
+## Configuración del proyecto
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/images/fragments05.png?raw=true" height="480"/>
+- Primer paso:
 
-
-### Creando un Fragment
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments.png?raw=true" height="480"/>
-
-```java
-    import android.os.Bundle;
-    import android.support.v4.app.Fragment;
-    import android.view.LayoutInflater;
-    import android.view.ViewGroup;
-
-    public class ArticleFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.article_view, container, false);
-        }
-    }
-```
-
-Una vez creado un fragment, este puede ser insertado como cualquier componente de diseño 
-
-```xml
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:orientation="horizontal"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent">
-
-      <fragment android:name="com.example.android.fragments.HeadlinesFragment"
-                android:id="@+id/headlines_fragment"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-      <fragment android:name="com.example.android.fragments.ArticleFragment"
-                android:id="@+id/article_fragment"
-                android:layout_weight="2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-</LinearLayout>
+Para conectarnos a la nube , necesitamos habilitar el permiso de internet. Para esto nos vamos a AndroidManifest y agregarmos el permiso :
 
 ```
-
-Para poder insertar el Fragment en un activity por programación
-
-```java
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-
-public class MainActivity extends FragmentActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.news_articles);
-
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
-        if (findViewById(R.id.fragment_container) != null) {
-
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
-            if (savedInstanceState != null) {
-                return;
-            }
-
-            // Create a new Fragment to be placed in the activity layout
-            HeadlinesFragment firstFragment = new HeadlinesFragment();
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            firstFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
-        }
-    }
-}
-```
-
-Otra opción podría ser reemplazar un fragment por otro , para lo cual :
-
-```java
-  // Create fragment and give it an argument specifying the article it should show
-  ArticleFragment newFragment = new ArticleFragment();
-  Bundle args = new Bundle();
-  args.putInt(ArticleFragment.ARG_POSITION, position);
-  newFragment.setArguments(args);
-
-  FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-  // Replace whatever is in the fragment_container view with this fragment,
-  // and add the transaction to the back stack so the user can navigate back
-  transaction.replace(R.id.fragment_container, newFragment);
-  transaction.addToBackStack(null);
-
-  // Commit the transaction
-  transaction.commit();
-```
-
-### Ciclo de un vida de un Fragment
-
-![fragments](https://developer.android.com/guide/components/images/activity_lifecycle.png)
-
-### Comunicación 
-
-Para poder comunicar un fragment con una actividad(padre) o con otro fragment , usamos interfaces como canal de comunicación
-
-```java
-    public class HeadlinesFragment extends ListFragment {
-        OnHeadlineSelectedListener mCallback;
-
-        // Container Activity must implement this interface
-        public interface OnHeadlineSelectedListener {
-            public void onArticleSelected(int position);
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-
-            // This makes sure that the container activity has implemented
-            // the callback interface. If not, it throws an exception
-            try {
-                mCallback = (OnHeadlineSelectedListener) activity;
-            } catch (ClassCastException e) {
-                throw new ClassCastException(activity.toString()
-                        + " must implement OnHeadlineSelectedListener");
-            }
-        }
-
-        ...
-    }
-```
-
-La interface puede ser creada de manera independiente o asociada a una actividad con la que se requiere comunicarse
-
-```java
-  public static class MainActivity extends Activity
-          implements HeadlinesFragment.OnHeadlineSelectedListener{
-      ...
-
-      public void onArticleSelected(int position) {
-          // The user selected the headline of an article from the HeadlinesFragment
-          // Do something here to display that article
-      }
-  }
-
-```
-
-Enviar parámetros a un Fragment, para lo cual usamos la clase "Bundle"
-
-```java
-public static class MainActivity extends Activity
-        implements HeadlinesFragment.OnHeadlineSelectedListener{
-    ...
-
-    public void onArticleSelected(int position) {
-        // The user selected the headline of an article from the HeadlinesFragment
-        // Do something here to display that article
-
-        ArticleFragment articleFrag = (ArticleFragment)
-                getSupportFragmentManager().findFragmentById(R.id.article_fragment);
-
-        if (articleFrag != null) {
-            // If article frag is available, we're in two-pane layout...
-
-            // Call a method in the ArticleFragment to update its content
-            articleFrag.updateArticleView(position);
-        } else {
-            // Otherwise, we're in the one-pane layout and must swap frags...
-
-            // Create fragment and give it an argument for the selected article
-            ArticleFragment newFragment = new ArticleFragment();
-            Bundle args = new Bundle();
-            args.putInt(ArticleFragment.ARG_POSITION, position);
-            newFragment.setArguments(args);
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack so the user can navigate back
-            transaction.replace(R.id.fragment_container, newFragment);
-            transaction.addToBackStack(null);
-
-            // Commit the transaction
-            transaction.commit();
-        }
-    }
-}
-```
-Comunicación Activity con Fragment
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments-communication1.png?raw=true" height="480"/>
-
-Comunicación Fragment con Activity
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments-communication2.png?raw=true" height="480"/>
-
-Comunicación Fragment con Fragment
-
-<img src="https://github.com/learning-android-pe/training-resources/blob/master/fragments-communication3.png?raw=true" height="480"/>
-
-## Storage Options
-
-- (en)https://developer.android.com/guide/topics/data/data-storage
-- (es)https://developer.android.com/guide/topics/data/data-storage?hl=es-419
-
-## DB Sqlite
-
-Otra forma de persistir información es usando una base de datos local (SQLITE), donde puedes usar el lenguaje SQL y realizar las operaciones que necesites para manejar una BD en tu APP.
-
-Lo primero, es crear una BD, donde definimos el nombre y versión, asi como las tablas
-
-```java
-package com.belatrix.kotlintemplate.storage;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
-public class MyDatabase extends SQLiteOpenHelper {
-
-
-    public static final int DATABASE_VERSION = 1;
- 
-    public static final String DATABASE_NAME = "BDNote";
- 
-    public static final String TABLE_NOTES = "tb_notes";
-    
-    //Columnas de la Tabla Notes
-    public static final String KEY_ID = "id";
-    public static final String KEY_NAME = "name";
-    public static final String KEY_DESC = "desc";
-    public static final String KEY_PATH = "path";
-    
-    
-    public MyDatabase(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        // TODO Auto-generated constructor stub
-    }
-    
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        // TODO Auto-generated method stub
-        String sql= "CREATE TABLE " + TABLE_NOTES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + KEY_NAME + " TEXT,"
-                + KEY_DESC + " TEXT,"
-                + KEY_PATH + " TEXT" + ")";
-        db.execSQL(sql);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO Auto-generated method stub
-        String sql= "DROP TABLE IF EXISTS " + TABLE_NOTES;
-        db.execSQL(sql);
-    }
-
-}
-```
-Con la BD creada , requerimos definir una entidad que represente a un de las tablas y otra clase para manejar las operaciones sobre ella (CRUD)
-
-Entidad :
-
-```java
-public class NoteEntity implements Serializable {
-
-    private int id;
-    private String name;
-    private String description;
-    private String path;
-
-    public NoteEntity() {
-    }
-
-    public NoteEntity(int id, String name, String description, String path) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.path = path;
-    }
-
-    public NoteEntity(String name, String description, String path) {
-        this.name = name;
-        this.description = description;
-        this.path = path;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    @Override
-    public String toString() {
-        return "NoteEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", path='" + path + '\'' +
-                '}';
-    }
-}
-```
-
-Operaciones (CRUD)
-
-```java
-public class CRUDOperations {
-
-    private MyDatabase helper;
-    public CRUDOperations(SQLiteOpenHelper _helper) {
-        super();
-        // TODO Auto-generated constructor stub
-        helper =(MyDatabase)_helper;
-}
+...
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.isil.am2template">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
 ...
 ```
 
-Por ejemplo, para agregar un registro
+- Segundo Paso :
 
-```java
-  public void addNote(NoteEntity noteEntity)
-    {
-       SQLiteDatabase db = helper.getWritableDatabase(); //modo escritura
-       ContentValues values = new ContentValues();
-       values.put(MyDatabase.KEY_NAME, noteEntity.getName());
-       values.put(MyDatabase.KEY_DESC, noteEntity.getDescription());
-       values.put(MyDatabase.KEY_PATH, noteEntity.getPath());
+Vamos a agregar la dependencias de algunas librerias que nos ayuden para la conexión y procesar los datos que nos llega de la nube.
 
-       db.insert(MyDatabase.TABLE_NOTES, null, values);
-       db.close();
-  }
+Retrofit : Es un cliente http diseñado para consumir servicios RESTFul , usa anotaciones para declarar las llamadas POST, GET, PUT , etc y tambien cuenta con callbacks para las respuesta a las peticiones hechas al servicio.
+
+Gson : Esta librería te permite procesar las tramas del respuesta de un servicio(JSON) y poder convertirlas en clases.
+
+OkHtttp : Sobre esta librería se construyo retrofit y es una librería general para realizar cualquier tipo de conección con un servicio RestFul o SOAP. Tambíen cuenta con ciertos utilitarios para poder visualizar en consola las tramas de envío y de respuesta . 
+
+En el file build.gradle de la app realizamos lo siguiente :
+        
+```
+//RETROFIT https://github.com/square/retrofit
+    //compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit2"
+
+    //GSON https://github.com/google/gson
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.gson"
+
+    //INTERCEPTOR
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3"
 ```
 
-Editar un registro
+y las versiones son declaradas en el file build.gradle del proyecto:
+        
+```
+ext {
+    // Sdk and tools
+    minSdkVersion = 15
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.1.0'
+    constraintLayoutVersion='1.0.2'
 
-```java
-public int updateNote(NoteEntity noteEntity)
-    {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(MyDatabase.KEY_NAME, noteEntity.getName());
-        values.put(MyDatabase.KEY_DESC, noteEntity.getDescription());
-        values.put(MyDatabase.KEY_PATH, noteEntity.getPath());
+    // App dependencies
+    supportLibraryVersion = '26.1.0'
+    junitVersion = '4.12'
 
-        int row =db.update(MyDatabase.TABLE_NOTES,
-                values,
-                MyDatabase.KEY_ID+"=?",
-                new String[]{String.valueOf(noteEntity.getId())});
-        db.close();
+    roomVersion= '1.0.0'
+    gsonVersion='2.8.0'
 
-        return row;
+    retrofit2='2.3.0'
+    gson='2.3.0'
+    okhttp3='3.4.1'
 }
 ```
+## Probando los servicios 
+    
+Antes de realizar las llamadas a los servicios desde la app , es saludable revisar que los servicios estén operativos y corroborar cuales son las tramas de envío ( request) y de respuesta (response).
+Para esto, vamos a usar POSTMAN
 
-Obtener un registro
-```java
-public NoteEntity getNote(int id)
+- Rest API
+
+En esta oportunidad se ha construido un API Rest usando node.js y mongo.db
+La url base es :
+
+```
+    https://obscure-earth-55790.herokuapp.com/
+```
+
+- Login
+
+    Método : POST
+    Path : api/login
+    Url : https://obscure-earth-55790.herokuapp.com/api/login
+    Request :
+```
     {
-        SQLiteDatabase db = helper.getReadableDatabase(); //modo lectura
-        Cursor cursor = db.query(MyDatabase.TABLE_NOTES,
-                new String[]{MyDatabase.KEY_ID, MyDatabase.KEY_NAME,
-                        MyDatabase.KEY_DESC, MyDatabase.KEY_PATH},
-                MyDatabase.KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null);
-        if(cursor!=null)
-        {
-            cursor.moveToFirst();
+        "username":"admin@admin.com",
+        "password": "123456"
+    }
+```
+    Response :
+
+```
+    {
+        "msg": "success",
+        "status": 200,
+        "data": {
+        "_id": "59e0540d429d3f501d6493de",
+        "id": "59e0540d429d3f501d6493de",
+        "username": "admin@admin.com",
+        "password": "123456",
+        "firstname": "Admin",
+        "lastname": "Admin",
+        "__v": 0
         }
-        int nid = Integer.parseInt(cursor.getString(0));
-        String name = cursor.getString(1);
-        String desc = cursor.getString(2);
-        String path = cursor.getString(3);
-
-        NoteEntity noteEntity= new NoteEntity(
-                nid, name, desc,path);
-        db.close();
-        return noteEntity;
-}
+    }
 ```
 
-Obtener todos los registros
+- Registro :
 
-```java
-public List<NoteEntity> getAllNotes()
+    Método : POST
+    Path : api/users/register
+    Url : https://obscure-earth-55790.herokuapp.com/api/users/register
+
+    Request :
+```
+{
+    "username":"demo@admin.com",
+    "password":"123456",
+    "firstname": "Demo",
+    "lastname": "Demo"
+}
+```
+    Response :
+
+```
     {
-        List<NoteEntity> lst =new ArrayList<NoteEntity>();
-        String sql= "SELECT  * FROM " + MyDatabase.TABLE_NOTES;
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql, null);
-        if(cursor.moveToFirst())
+        "__v": 0,
+        "id": "59ea8b0f3ad73212009b314b",
+        "username": "demo@admin.com",
+        "password": "123456",
+        "firstname": "Demo",
+        "lastname": "Demo",
+        "_id": "59ea8b0f3ad73212009b314b"
+    }
+```
+
+- Usuarios :
+
+    Método : GET
+    Path : api/users/
+    Url : https://obscure-earth-55790.herokuapp.com/api/users/
+
+    Response :
+
+```
+    {
+        "msg": "success",
+        "status": 200,
+        "data": [
         {
-            do
-            {
-                NoteEntity contact =new NoteEntity();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
-                contact.setName(cursor.getString(1));
-                contact.setDescription(cursor.getString(2));
-                contact.setPath(cursor.getString(3));
-
-                lst.add(contact);
-            }while(cursor.moveToNext());
+            "_id": "59e0540d429d3f501d6493de",
+            "id": "59e0540d429d3f501d6493de",
+            "username": "admin@admin.com",
+            "password": "123456",
+            "firstname": "Admin",
+            "lastname": "Admin",
+            "__v": 0
+        },
+        {
+            "_id": "59e17088225f6f7b12d14b07",
+            "id": "59e17088225f6f7b12d14b07",
+            "username": "demo@demo.com",
+            "password": "123456",
+            "firstname": "Demo",
+            "lastname": "Demo",
+            "__v": 0
+        },
+        {
+            "_id": "59ea8b0f3ad73212009b314b",
+            "id": "59ea8b0f3ad73212009b314b",
+            "username": "demo@admin.com",
+            "password": "123456",
+            "firstname": "Demo",
+            "lastname": "Demo",
+            "__v": 0
         }
-        db.close();
-        return lst;
-}
+        ]
+    }
+
 ```
 
-Borrar un registro
 
-```java
-  public int deleteNote(NoteEntity noteEntity)
-    {
-       SQLiteDatabase db = helper.getWritableDatabase(); 
-       int row= db.delete(MyDatabase.TABLE_NOTES,
-           MyDatabase.KEY_ID+"=?", 
-           new String[]{String.valueOf(noteEntity.getId())});
-       db.close();
-      return row;
-  }
+- Notas 
+
+Método : GET
+
+Path : api/notes/
+
+Url : https://obscure-earth-55790.herokuapp.com/api/notes/
+    
+```
+{"msg":"success","status":200,"data":[{"_id":"59f3c5f5145d3812006ab70d","id":"59f3c5f5145d3812006ab70d","name":"My nota","description":"Esta es un nota del server","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f3cc7df3474b1200ef4749","id":"59f3cc7df3474b1200ef4749","name":"Aviso","description":"Tomar UA3","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f3d417f3474b1200ef476a","id":"59f3d417f3474b1200ef476a","name":"My nota2","description":"Test Note4","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f3d459f3474b1200ef476b","id":"59f3d459f3474b1200ef476b","name":"Aviso","description":"Get ready for UA3","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f3d4def3474b1200ef476c","id":"59f3d4def3474b1200ef476c","name":"Recordatorio","description":"Entregable 2 del proyecto android","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f3d926f3474b1200ef476d","id":"59f3d926f3474b1200ef476d","name":"Recordatorio","description":"Entregable 2 del proyecto android","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f3df96f3474b1200ef476e","id":"59f3df96f3474b1200ef476e","description":"Nota de la app","name":"nota desde la app","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f48504e863f612000bc670","id":"59f48504e863f612000bc670","name":"Nota demo 1","description":"Nota de usuario demo 1","path":"","userId":"59e17088225f6f7b12d14b07","__v":0},{"_id":"59f48513e863f612000bc671","id":"59f48513e863f612000bc671","name":"Nota demo 2","description":"Nota de usuario demo 2","path":"","userId":"59e17088225f6f7b12d14b07","__v":0},{"_id":"59f4851be863f612000bc672","id":"59f4851be863f612000bc672","name":"Nota demo 3 Update 1","description":"Nota de usuario demo 3","path":"","userId":"59e17088225f6f7b12d14b07","__v":0},{"_id":"59f498c6502b052218b25479","id":"59f498c6502b052218b25479","name":"My nota 00","description":"Esta es un nota 00","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f4999d2e554e9918fe21a9","id":"59f4999d2e554e9918fe21a9","name":"My nota 02","description":"Esta es un nota 02","path":"","userId":"59e0540d429d3f501d6493de","__v":0},{"_id":"59f49a0e2e554e9918fe21aa","id":"59f49a0e2e554e9918fe21aa","name":"My nota 02","description":"Esta es un nota 02","path":"","userId":"59e0540d429d3f501d6493de","__v":0}]}
+
 ```
 
-## SharedPreferences
+- Agregar Notas
 
-- Inicializar SharedPreferences
+Método : POST
 
-```java
-Context context = getActivity();
-SharedPreferences sharedPref = context.getSharedPreferences(
-        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-```
-- Guardar un valor
+Path : api/notes/register
 
-```java
-SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-SharedPreferences.Editor editor = sharedPref.edit();
-editor.putInt(getString(R.string.saved_high_score_key), newHighScore);
-editor.commit();
-```
+Url : https://obscure-earth-55790.herokuapp.com/api/notes/register
 
-- Obtener un valor
-```java
-SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-int defaultValue = getResources().getInteger(R.integer.saved_high_score_default_key);
-int highScore = sharedPref.getInt(getString(R.string.saved_high_score_key), defaultValue);
-```
+
+- Actualizar Notas
+
+Método : PUT
+
+Path : api/notes/{id}
+
+Url : https://obscure-earth-55790.herokuapp.com/api/notes/59f498c6502b052218b25479
+
+- Borrar Notas
+
+Método : DELETE
+
+Path : api/notes/{id}
+
+Url : https://obscure-earth-55790.herokuapp.com/api/notes/59f498c6502b052218b25479
+
+## Ejemplo BackendLess
+
+- Backendless https://backendless.com
+
+- Backendless REST API https://backendless.com/docs/rest/doc.html
+
+- LogIn https://backendless.com/docs/rest/doc.html#users_login
+
+## Patrones y Arquitectura de aplicaciones móviles
+
+- Explicaremos un poco de las diferentes opciones de patrones y arquitecturas para el desarrollo de aplicaciones móviles.
+
+- Usaremos el patrón Model View Presenter (MVP)
+
+ <img src="https://github.com/emedinaa/android-mvp/blob/master/modelviewpresenter.png" height="480">
+
+ - Model : Esta relacionado a las entidades y los cambios que se den estas.
+
+    - Entidad : Entidades de nuesta app, ejemplo UserEntity
+    - Cambios en el modelo : Aquí puede estar nuestros proveedores de datos , como sqlite para persistencia local o las peticiones a servicios (conexión remota).
+
+- View : Esta elemento se comparto como un terminal tonto o pasivo,  donde solo tiene declarada acciones de la vista pero no lógica propia de la app. Esta a la espera que un controlador le diga las acciones a realizar.
+
+    - ¿Qué son acciones de una vista?, Las acciones de vista son cosas como : mostrar una ventana de cargando, mostrar un mensaje de error, validar campos de un formulario, cambiar de pantalla.
+    - Los fragments y las activities son Views ?, estrictamente hablando no, yo puedo crear un interface que represente lo que va a realizar una vista. La idea es trabajar con la interface y no directamente con el fragment o activity.
+
+- Presenter : Este elemento va tener la lógica , se comunica con el módelo. Recibe los cambios del modelo y actualiza la vista. Se comporta como controlador de las vistas.
 
 ## Samples
 
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise1.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise2.png?raw=true" height="320"/>
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise3.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/Exercise5.png" height="320"/>
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_color.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_contacts.png?raw=true" height="320"/>
-
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_message.png?raw=true" height="320"/> <img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson6/exercises/screenshot_tab.png?raw=true" height="320"/>
-
-- FragmentSamples
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson7/images/fragment_samples.png?raw=true" height="480"/>
-
-- NavigationSamples
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson7/images/navigation_samples.png?raw=true" height="480"/>
-
-- DBSamples
-<img src="https://github.com/emedinaa/amoviles-android-basic-intermediate/blob/Lesson7/images/db_samples.png?raw=true" height="480"/>
-
 ## Homework
 
-- Realizar los ejercicios  01, 02 sobre Fragments
+- xxxx
 
 ## Resources 
 
-- Fragment https://developer.android.com/reference/android/app/Fragment.html
+- Connecting to the Network https://developer.android.com/training/basics/network-ops/connecting.html
 
-- Developer Guides : Fragments https://developer.android.com/guide/components/fragments.html
+- Transmitting Network Data Using Volley https://developer.android.com/training/volley/index.html
 
-- Building a Dynamic UI with Fragments https://developer.android.com/training/basics/fragments/index.html
+- Retrofit http://square.github.io/retrofit/
 
-- Storage Options https://developer.android.com/guide/topics/data/data-storage.html
+- Retrofit 2 tutoriales https://futurestud.io/
 
-- Save Data using SQLite https://developer.android.com/training/data-storage/sqlite.html
+- HeaderMap
 
-- Saving data in local database using Room https://developer.android.com/training/data-storage/room/index.html
+https://futurestud.io/tutorials/retrofit-2-dynamic-request-headers-with-headermap
 
-- ORMLite http://ormlite.com/
+- GSON Annotations
 
-- SugarORM http://satyan.github.io/sugar/
+http://www.javacreed.com/gson-annotations-example/
 
-- Realm https://realm.io/docs
+ - Principios S.O.L.I.D https://academy.realm.io/posts/learning-path-solid-principles-for-android/
 
-- Save Key-Value Data with SharedPreferences https://developer.android.com/training/data-storage/shared-preferences.html#java
+ - Android Architecture Blueprints https://github.com/googlesamples/android-architecture
 
-- Save Data using SQLite https://developer.android.com/training/data-storage/sqlite.html
+ - MVP Pattern (Microsoft) https://msdn.microsoft.com/en-us/library/ff649571.aspx
 
-- Material icons https://material.io/tools/icons/?style=baseline
+ - GUI Architectures (Martin Fowler) https://martinfowler.com/eaaDev/uiArchs.html
+
+ - MVC, MVP , MVVM (Realm) https://academy.realm.io/posts/eric-maxwell-mvc-mvp-and-mvvm-on-android/
+
+ - Ejemplo MVP
+ https://github.com/emedinaa/android-mvp
+ 
+ - Clean Architecture https://docs.google.com/presentation/d/1Eg2V_0j0UO1V3gvYBMYomsMjS9cxD-p-CldPB68ZQxs/edit?usp=sharing
