@@ -341,3 +341,8 @@ http://www.javacreed.com/gson-annotations-example/
  https://github.com/emedinaa/android-mvp
  
  - Clean Architecture https://docs.google.com/presentation/d/1Eg2V_0j0UO1V3gvYBMYomsMjS9cxD-p-CldPB68ZQxs/edit?usp=sharing
+ 
+ - Http Status https://httpstatuses.com/
+ 
+ - Http methods https://restfulapi.net/http-methods/
+ 
