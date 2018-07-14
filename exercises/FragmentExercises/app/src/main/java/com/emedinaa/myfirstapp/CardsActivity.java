@@ -18,7 +18,7 @@ public class CardsActivity extends AppCompatActivity implements OnCardListener {
         setContentView(R.layout.activity_cards);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ui();
-        //populateCards();
+        populateCards();
 
     }
 
@@ -34,7 +34,7 @@ public class CardsActivity extends AppCompatActivity implements OnCardListener {
 
     private void populateCards() {
 
-        for (int i = 0; i <5 ; i++) {
+        for (int i = 0; i <3 ; i++) {
             addFragment();
         }
     }

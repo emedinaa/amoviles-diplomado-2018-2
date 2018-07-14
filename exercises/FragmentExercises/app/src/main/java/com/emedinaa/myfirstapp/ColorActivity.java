@@ -29,7 +29,7 @@ public class ColorActivity extends AppCompatActivity implements OnColorListener 
 
     @Override
     public void seleccionarColor(int pos) {
-        //boxFragment.recibirColoryPintar(pos);
+        boxFragment.recibirColoryPintar(pos);
     }
 
     /*@Override

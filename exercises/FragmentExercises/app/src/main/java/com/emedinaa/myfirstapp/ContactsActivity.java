@@ -39,7 +39,7 @@ public class ContactsActivity extends AppCompatActivity implements OnContactList
 
     @Override
     public void selectedItemContact(ContactEntity contactEntity) {
-        //contactDetailFragment.renderContact(contactEntity);
+        contactDetailFragment.renderContact(contactEntity);
     }
 
     @Override

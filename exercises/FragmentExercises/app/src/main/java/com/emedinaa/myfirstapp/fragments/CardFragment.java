@@ -146,7 +146,7 @@ public class CardFragment extends Fragment {
 
                     case MotionEvent.ACTION_UP:
 
-                        if(Math.abs(angle)>60){
+                        if(Math.abs(angle)>50){
                             if(mListener!=null){
                                 mListener.removeCard(CardFragment.this);
                             }

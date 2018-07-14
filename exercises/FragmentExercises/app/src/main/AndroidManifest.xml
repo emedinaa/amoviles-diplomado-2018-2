@@ -19,11 +19,11 @@
 
         <activity android:name=".ColorActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".ContactsActivity"
@@ -38,11 +38,11 @@
 
         <activity android:name=".CardsActivity"
             android:screenOrientation="portrait">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
     </application>
 
