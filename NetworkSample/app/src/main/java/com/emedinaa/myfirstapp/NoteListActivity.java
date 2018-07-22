@@ -79,7 +79,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if(response!=null){
                     NotesResponse notesResponse=null;
 
-                    if(response.isSuccessful()){
+                    if(response.isSuccessful()){//200
                         notesResponse=response.body();
                         if(notesResponse!=null){
                             if(notesResponse.getStatus()==200){
