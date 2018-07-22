@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--<external-files-path name="my_images" path="Android/data/com.androidbootcamp.camera/files/Pictures/album_tmp"/>-->
-    <!--<external-files-path name="my_images" path="."/>-->
-    <!--<external-files-path name="my_images" path="/"/>-->
-    <!--<root-path name="root" path="." />-->
+
+    <external-files-path name="my_images" path="Pictures"/>
     <external-files-path name="my_images" path="Pictures"/>
     <external-files-path name="my_images_album" path="Pictures/album_tmp"/>
     <external-files-path name="my_images_" path="."/>
+    <external-files-path name="my_images__" path="/storage/emulated/0/dcim/myAlbum"/>
+    <external-files-path name="my_images_photo" path="/storage/emulated/0/Pictures/MyCameraApp/"/>
+
     <root-path name="root" path="Pictures/album_tmp" />
-    <root-path name="root_album" path="/storage/emulated/0/Pictures/album_tmp/" />
+    <!--<root-path name="root_album" path="/storage/emulated/0/Pictures/album_tmp/" />-->
+    <root-path name="root_album" path="/storage/emulated/0/dcim/myAlbum/" />
+    <root-path name="root_album_photo" path="/storage/emulated/0/Pictures/MyCameraApp/" />
+
+    <!--<files-path path="/storage/emulated/0/dcim/myAlbum/" name="images/" />-->
+
 </paths>

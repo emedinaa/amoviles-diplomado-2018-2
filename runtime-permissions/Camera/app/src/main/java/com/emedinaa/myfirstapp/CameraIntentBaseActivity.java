@@ -99,7 +99,7 @@ public class CameraIntentBaseActivity extends BaseMediaActivity implements View.
             f = setUpPhotoFile();
             currentPhotoPath = f.getAbsolutePath();
 
-            Uri photoUri= FileProvider.getUriForFile(this,"com.androidbootcamp.camera",f);
+            Uri photoUri= FileProvider.getUriForFile(this,"com.emedinaa.myfirstapp",f);
             //takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
         } catch (IOException e) {
@@ -113,6 +113,8 @@ public class CameraIntentBaseActivity extends BaseMediaActivity implements View.
     @Override
     protected void renderPhoto() {
         super.renderPhoto();
+        //Piccaso.load(iviPhoto, new File(currentPhotoPath));
+
         Bitmap bitmap= imageHelper.bitmapByPath(iviPhoto.getWidth(),
                 iviPhoto.getHeight(),currentPhotoPath);
         /*BitmapFactory.Options bmOptions = new BitmapFactory.Options();

@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>-->
 
     <!-- END_INCLUDE(manifest) -->
     <application
@@ -33,22 +34,22 @@
         </activity>
         <activity android:name=".CameraPermissionActivity">
 
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
         </activity>
         <activity
             android:name=".camera.CameraPreviewActivity"
             android:exported="false" />
         <activity android:name=".ContactPermissionsActivity">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity android:name=".ContactDetailsActivity" />
     </application>
