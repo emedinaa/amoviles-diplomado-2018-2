@@ -12,8 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.androidbootcamp.androidtemplate.ContactDetailsActivity;
-
 public class ContactPermissionsActivity extends AppCompatActivity {
 
 

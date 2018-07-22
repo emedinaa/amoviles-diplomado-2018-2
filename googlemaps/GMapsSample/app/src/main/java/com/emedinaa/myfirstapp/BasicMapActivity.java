@@ -51,18 +51,18 @@ public class BasicMapActivity extends AppCompatActivity  implements OnMapReadyCa
         mMap.getUiSettings().setZoomControlsEnabled(false);
 
         //camera
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(defaultLat, defaultLng), ZOOM));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(defaultLat, defaultLng), ZOOM));
         //addMarker();
 
         //indoor
-        //indoorMaps();
+        indoorMaps();
 
         //custom markers
         //customMarkers();
 
         //polylines
         //polylines();
-        cameraTilt();
+        //cameraTilt();
     }
 
     private void addMarker(){
